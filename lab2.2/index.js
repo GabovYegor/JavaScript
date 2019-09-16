@@ -1,5 +1,5 @@
 //const app = require('./app')
-const fileWork = require('./app/DataBase/workWithDataBase')
+const fileWork = require('./workWithDataBase')
 const express = require('express')
 const bodyParser = require('body-parser')
 const passport = require('passport')
@@ -13,15 +13,12 @@ app.use(passport.session())
 
 app.set('view engine', 'pug');
 app.set('views', './views')
-require('./app/authentication').init()
-require('./app/user').init(app)
-require('./app/note').init(app)
+require('./authentification').initPassport()
+require('./user').initUser(app)
+require('./note').initUser(app)
 
 // Админ не реализован
-fileWork.initDataBase('./app/DataBase/DataBase.json', [ { role: 'admin', username: 'admin', password: 'admin' } ])
-
-//module.exports = app
-
+fileWork.initDataBase('DataBase.json', [ { role: 'admin', username: 'admin', password: 'admin' } ])
 const port = process.env.PORT || 8080
 
 app.listen(port, function (err) {
