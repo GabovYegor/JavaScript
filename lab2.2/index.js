@@ -15,10 +15,14 @@ app.set('view engine', 'pug');
 app.set('views', './views')
 require('./authentification').initPassport()
 require('./user').initUser(app)
-require('./note').initUser(app)
 
-// Админ не реализован
-fileWork.initDataBase('DataBase.json', [ { role: 'admin', username: 'admin', password: 'admin' } ])
+fileWork.initDataBase()
+db = new fileWork.DataBase()
+db.addAdmin({ username: 'admin', password: 'admin' })
+db.addBook(new fileWork.Book('Пушкин', 'Евгений Онегин'))
+db.addBook(new fileWork.Book('Толстой', 'Война и Мир'))
+db.addBook(new fileWork.Book('Габов', 'Паттерны проектирования'))
+
 const port = process.env.PORT || 8080
 
 app.listen(port, function (err) {

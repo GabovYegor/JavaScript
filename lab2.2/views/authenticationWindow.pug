@@ -8,7 +8,7 @@ h2 LOGIN WITH PASSPORT:
 form(action='/login' method='post')
     label
         | Login
-        input#username(name='username' type='text' placeholder='Your username' style='margin: 10px;')
+        input#username(name='username' type='text' placeholder='Your username' style='margin: 10px 33px;')
     br
     label
         | Password
@@ -16,5 +16,7 @@ form(action='/login' method='post')
         br
     input(type='submit' style='margin: 10px' value='Войти')
     input(type='submit' formaction='/' style='margin: 10px' value='Зарегистрироваться')
+    br
+    input(type='submit' formaction='admin' style='width: 215px; margin: 10px' value='Войти как администратор')
 
 

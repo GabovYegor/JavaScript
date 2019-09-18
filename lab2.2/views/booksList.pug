@@ -1,0 +1,19 @@
+style.
+    .mystyle {
+        color: #0074D9;
+    }
+
+h1 Books List
+h2.mystyle
+    ol
+        each val in books
+            li Название книги: #{val.name}
+            | Автор: #{val.author}
+            br
+            | Номер: #{val.id}
+            br
+            | Местоположение: #{val.location}
+            a(href='/bookCard/' + val.id)  Перейти к карточке книги
+
+h2
+    a(href='/profile')  Перейти к профилю пользователя

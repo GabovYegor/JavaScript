@@ -1,4 +1,22 @@
-h2 User Profile
+style.
+    .rowStyle {
+        color: red;
+        background-color: #5E740B;
+        margin: 10px 100px;
+        width: 300px;
+    }
+
+    .mystyle{
+        color: #2b81af;
+    }
+
+
+
+h2.mystyle User Profile #{user.username}
     ol
-        each val in mas
-            li= val.name + ' ' + val.role + ' ' + val.id
+        each val in user.books
+            li
+                a(href='/bookCard/' + val.id) Название книги: #{val.name} Автор: #{val.author} НОмер: #{val.id}
+
+    h3
+        a(href='/booksList') Перейти к полному списку книг
