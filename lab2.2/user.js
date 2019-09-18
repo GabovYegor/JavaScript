@@ -2,10 +2,6 @@ const passport = require('passport')
 const fileWork = require('./workWithDataBase')
 
 // добавить роутер вместо инициализации app
-// хранить у пользователя только id книги
-// не забывать аутентифицироваться при переходе по страницам
-// у админа не проверяется идентификация
-
 function initUser (app) {
     app.get('/', (req, res) => { res.render('authenticationWindow') })
     app.get('/profile', passport.authenticationMiddleware(), renderProfile)
@@ -14,11 +10,26 @@ function initUser (app) {
         failureRedirect: '/'
     }))
     app.post('/', userRegistration)
-    app.get('/admin', (req, res) => {res.redirect('/')})
+    app.get('/admin', passport.authenticationMiddleware(), (req, res) => {res.render('adminPage')})
     app.post('/admin',  passport.authenticationMiddleware(), admin)
     app.get('/bookCard/:id', passport.authenticationMiddleware(), downloadBookCard)
     app.get('/take/:id', passport.authenticationMiddleware(), takeBook)
+    app.get('/returnBook/:id', passport.authenticationMiddleware(), returnBook)
+    app.get('/changeBookPage/:id', passport.authenticationMiddleware(), (req, res) => { res.render('changeBook', {ID: req.params.id}) })
+    app.post('/changeBookAction', passport.authenticationMiddleware(), changeBook)
     app.get('/booksList', passport.authenticationMiddleware(), printBooksList)
+    app.post('/addBook', passport.authenticationMiddleware(),
+        (req, res) => {
+            db = new fileWork.DataBase()
+            db.addBook(new fileWork.Book(req.body.author, req.body.name))
+            res.redirect('/admin')
+        })
+    app.post('/deleteBook', passport.authenticationMiddleware(),
+        (req, res) => {
+            db = new fileWork.DataBase()
+            db.deleteBook(req.body.id)
+            res.redirect('/admin')
+    })
 }
 
 function admin(req, res) {
@@ -52,32 +63,19 @@ function renderProfile (req, res) {
     data = db.getCurrentUser()
     user = new fileWork.User(data.username, data.password, data.books, data.id, true)
     db.updateUser(user)
-    if(user.id === 1) {
-        if (!user.getBook(1))
-            console.log('This book empty')
-    }
-
-    if(user.id === 2) {
-        if (!user.getBook(3))
-            console.log('This book empty')
-    }
-
     res.render('userProfile', {
         user: user
     })
 }
 
 function downloadBookCard(req, res){
-    db = new fileWork.DataBase()
-    console.log(req.params.id)
+    let db = new fileWork.DataBase()
     let receivedBook = db.getBookByID(req.params.id)
-    console.log(receivedBook)
     let book = new fileWork.Book(receivedBook.author, receivedBook.name, receivedBook.id, receivedBook.location)
     db.updateBooks(book)
-
     res.render('bookCard', {
         book: book,
-        user: db.getCurrentUser(),
+        userId: db.getCurrentUser().id,
         bookID: req.params.id
     })
 }
@@ -95,6 +93,29 @@ function takeBook(req, res){
     user = new fileWork.User(data.username, data.password, data.books, data.id, true)
     db.updateUser(user)
     user.getBook(req.params.id)
+    res.redirect('/booksList')
+}
+
+function returnBook(req, res){
+    data = db.getCurrentUser()
+    user = new fileWork.User(data.username, data.password, data.books, data.id, true)
+    db.updateUser(user)
+    user.returnBook(req.params.id)
+    res.redirect('/booksList')
+}
+
+function changeBook(req, res){
+    db = new fileWork.DataBase()
+    let oldBook = db.getBookByID(req.body.ID)
+    let oldData = db.getUserByID(oldBook.location)
+    oldUser = new fileWork.User(oldData.username, oldBook.password, oldData.books, oldBook.id, true)
+    oldUser.deleteBook(oldBook)
+    let book = new fileWork.Book(req.body.newAuthor, req.body.newName, req.body.ID, req.body.newLocation)
+    db.updateBooks(book)
+    data = db.getUserByID(req.body.newLocation)
+    user = new fileWork.User(data.username, data.password, data.books, data.id, true)
+    user.books.push(book)
+    db.updateUser(user)
     res.redirect('/booksList')
 }
 

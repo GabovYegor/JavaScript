@@ -10,13 +10,19 @@ style.
         color: #2b81af;
     }
 
-
-
 h2.mystyle User Profile #{user.username}
     ol
         each val in user.books
-            li
-                a(href='/bookCard/' + val.id) Название книги: #{val.name} Автор: #{val.author} НОмер: #{val.id}
+            li Название книги: #{val.name}
+            | Автор: #{val.author}
+            br
+            | Номер: #{val.id}
+            br
+            | Местоположение: #{val.location}
+            a(href='/bookCard/' + val.id)  Перейти к карточке книги
 
     h3
         a(href='/booksList') Перейти к полному списку книг
+
+h2
+    a(href='/') Перейти к регистрации пользователя

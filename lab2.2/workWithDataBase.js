@@ -5,15 +5,19 @@ class DataBase {
     constructor(){
         let rawData = fs.readFileSync('./DataBase.json')
         let db = JSON.parse(rawData)
-        this.admin = db.admin
         this.currentUserName = db.currentUserName
         this.userMas = db.userMas
         this.booksMas = db.booksMas
+        this.staticMas = db.staticMas
     }
 
-    addAdmin (admin) {
-        this.admin = admin
+    incrementStaticMas(){
+        this.staticMas.push(1)
         this.updateDataBase()
+    }
+
+    getStaticMasSize(){
+        return this.staticMas.length
     }
 
     setCurrentUser (currentUserName) {
@@ -28,6 +32,12 @@ class DataBase {
         }
     }
 
+    getUserByID(id){
+        for(let user of this.userMas)
+            if (user.id == id)
+                return user
+    }
+
     addUser (user) {
         this.userMas.push(user)
         this.updateDataBase()
@@ -39,6 +49,19 @@ class DataBase {
     addBook (book) {
         this.booksMas.push(book)
         this.updateDataBase()
+    }
+
+    deleteBook(id){
+        for(let i = 0; i < this.booksMas.length; ++i){
+            if(this.booksMas[i].id == id) {
+                if(this.booksMas[i].location){
+                    console.log('Невозможно удалить книгу - пользователь её не вернул')
+                    return
+                }
+                this.booksMas.splice(i, 1)
+                this.updateDataBase()
+            }
+        }
     }
 
     getBookCount(){ return this.booksMas.length }
@@ -62,7 +85,7 @@ class DataBase {
 
     updateBooks(book){
         for(let i = 0; i < this.booksMas.length; ++i)
-            if(this.booksMas[i].name === book.name)
+            if(this.booksMas[i].id == book.id)
                 this.booksMas[i] = book
         this.updateDataBase()
     }
@@ -73,16 +96,18 @@ class DataBase {
 }
 
 class Book{
-    constructor(author, name, id = db.getBookCount() + 1, location = 0){
+    constructor(author, name, id = db.getStaticMasSize(), location = 0){
         this.author = author
         this.name = name
         this.id = id
         this.location = location
+        if(id == db.getStaticMasSize())
+            db.incrementStaticMas()
     }
 }
 
 class User{
-    constructor(username = 'default', password = 'default', books = [], id = db.getUserCount() + 1, flag = false){
+    constructor(username = 'default', password = 'default', books = [], id = db.getUserCount(), flag = false){
         this.username = username
         if(flag)
             this.password = password
@@ -93,7 +118,7 @@ class User{
     }
 
     getBook(bookID){
-        db = new DataBase()
+        let db = new DataBase()
         let receivedBook = db.getBookByID(bookID)
         let book = new Book(receivedBook.author, receivedBook.name, receivedBook.id, receivedBook.location)
 
@@ -106,10 +131,36 @@ class User{
         }
         return 0;
     }
+
+    returnBook(bookID){
+        let db = new DataBase()
+        for(let i = 0; i < this.books.length; ++i)
+            if(this.books[i].id == bookID)
+                this.books.splice(i, 1)
+
+        db.updateUser(this)
+        let masBooks = db.getBooksMas()
+        for(let book of masBooks) {
+            if (book.id == bookID) {
+                book.location = 0
+                console.log(book)
+                db.updateBooks(book)
+            }
+        }
+    }
+
+    deleteBook(receivedBook){
+        for(let i = 0; i < this.books.length; ++i){
+            if(this.books[i].ID == receivedBook.ID)
+                this.books.splice(i, 1)
+        }
+    }
 }
 
 function initDataBase(){
-    fs.writeFileSync('./DataBase.json', JSON.stringify({admin: '', currentUserName: '', userMas: [], booksMas: []}))
+    fs.writeFileSync('./DataBase.json', JSON.stringify({currentUserName: '', userMas: [], booksMas: [], staticMas: [1]}))
+    db = new DataBase()
+    db.addUser(new User('admin', 'admin'))
 }
 
 module.exports = {

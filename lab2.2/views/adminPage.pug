@@ -1,20 +1,23 @@
 h1 Страница Администратора
 
 h2 Удаление книги
-form(action='/login' method='post')
+form(action='/deleteBook' method='post')
     label
         | ID книги для удаления
-        input#delete(name='delete' type='text' placeholder='book ID' style='margin: 10px')
+        input(name='id' type='text' placeholder='book ID' style='margin: 10px')
         br
         input(type='submit' style='margin: 10px' value='Удалить')
 
 h2 Добавление книги
-form(action='/login' method='post')
+form(action='/addBook' method='post')
     label
         | Автор книги
-        input#author(name='author' type='text' placeholder='автор книги' style='margin: 10px')
+        input(name='author' type='text' placeholder='автор книги' style='margin: 10px')
         br
         | Название книги
-        input#name(name='name' type='text' placeholder='название книги' style='margin: 10px')
+        input(name='name' type='text' placeholder='название книги' style='margin: 10px')
         br
         input(type='submit' style='margin: 10px' value='Добавить')
+
+h2
+    a(href='/') Перейти к регистрации пользователя

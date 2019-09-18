@@ -1,3 +1,14 @@
 h1 #{book.name}
-    h2 Книга номер #{bookID}
-    a(href=/take/ + bookID) Взять книгу
+    h2 Книга номер #{book.id}
+    if(!book.location)
+        a(href=/take/ + book.id) Взять книгу
+    else if(book.location == userId)
+        a(href=/returnBook/ + book.id) Вернуть книгу
+    else
+        h2 Книга в распоряжении пользователя #{book.location}
+
+h2
+    a(href='/booksList') Перейти к списку всех книг
+
+h2
+    a(href=/changeBookPage/ + book.id) Изменить информацию о книге

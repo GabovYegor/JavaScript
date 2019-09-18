@@ -18,7 +18,6 @@ require('./user').initUser(app)
 
 fileWork.initDataBase()
 db = new fileWork.DataBase()
-db.addAdmin({ username: 'admin', password: 'admin' })
 db.addBook(new fileWork.Book('Пушкин', 'Евгений Онегин'))
 db.addBook(new fileWork.Book('Толстой', 'Война и Мир'))
 db.addBook(new fileWork.Book('Габов', 'Паттерны проектирования'))
