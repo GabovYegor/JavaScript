@@ -1,19 +1,111 @@
-style.
-    .mystyle {
-        color: #0074D9;
-    }
+html
+    style.
+        body {
+            background-color: RGB(200, 200, 100); /* Цвет фона веб-страницы */
+        }
 
-h1 Books List
-h2.mystyle
-    ol
-        each val in books
-            li Название книги: #{val.name}
-            | Автор: #{val.author}
-            br
-            | Номер: #{val.id}
-            br
-            | Местоположение: #{val.location}
-            a(href='/bookCard/' + val.id)  Перейти к карточке книги
+        a:link {
+            color: green;
+            background-color: transparent;
+            text-decoration: none;
+        }
 
-h2
-    a(href='/profile')  Перейти к профилю пользователя
+        a:visited {
+            color: RGB(0, 0, 250);
+            background-color: transparent;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: red;
+            background-color: transparent;
+            text-decoration: underline;
+        }
+
+        a:active {
+            color: yellow;
+            background-color: transparent;
+            text-decoration: underline;
+        }
+
+        .headerStyle {
+            margin: 10px 100px;
+            position: absolute;
+            left: 30%
+        }
+
+        .liStyle {
+            list-style-position: inside;
+            border: 2px solid black;
+            margin: 10px 10px;
+            width: 700px;
+        }
+
+        .oddliStyle {
+            list-style-position: inside;
+            border: 2px solid black;
+            margin: -30px 954px;
+            width: 700px;
+        }
+
+        ol {
+            columns: 2;
+        }
+
+    body
+        a(href='/profile')  Перейти к профилю пользователя
+        h1.headerStyle Список книг в библиотеке
+        - for(let i = 0; i < 4; ++i)
+            br
+        if(books.length % 2 == 0)
+            h2
+                ol
+                    each val in books
+                        li.liStyle
+                            | Название книги: #{val.name}
+                            br
+                            | Автор: #{val.author}
+                            br
+                            if(val.location == 0)
+                                | Книга находится в библиотеке
+                            else
+                                | Книга в распоряжении пользователя c идентификатором: #{db.getUserByID(val.location).username}
+                            br
+                            a(href='/bookCard/' + val.id) Перейти к карточке книги
+                            br
+                            br
+        else
+            h2
+                ol
+                    - for(let i = 0; i < books.length - 1; ++i)
+                        li.liStyle
+                            | Название книги: #{books[i].name}
+                            br
+                            | Автор: #{books[i].author}
+                            br
+                            if(books[i].location == 0)
+                                | Книга находится в библиотеке
+                            else
+                                | Книга в распоряжении пользователя c идентификатором: #{db.getUserByID(books[i].location).username}
+                            br
+                            a(href='/bookCard/' + books[i].id) Перейти к карточке книги
+                            br
+                            br
+
+                div.oddliStyle
+                    | #{books.length}. Название книги: #{books[books.length - 1].name}
+                    br
+                    | Автор: #{books[books.length - 1].author}
+                    br
+                    if(books[books.length - 1].location == 0)
+                        | Книга находится в библиотеке
+                    else
+                        | Книга в распоряжении пользователя c идентификатором: #{db.getUserByID(books[books.length - 1].location).username}
+                    br
+                    a(href='/bookCard/' + books[books.length - 1].id) Перейти к карточке книги
+                    br
+                    br
+
+
+
+

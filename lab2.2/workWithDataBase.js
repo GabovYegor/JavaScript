@@ -36,6 +36,15 @@ class DataBase {
         for(let user of this.userMas)
             if (user.id == id)
                 return user
+        return 1
+    }
+
+    getUserByName(username){
+        for(let user of this.userMas) {
+            if (user.username == username)
+                return user
+        }
+        return 1
     }
 
     addUser (user) {
@@ -60,11 +69,11 @@ class DataBase {
                 }
                 this.booksMas.splice(i, 1)
                 this.updateDataBase()
+                return;
             }
         }
+        console.log('Данная книга не найдена')
     }
-
-    getBookCount(){ return this.booksMas.length }
 
     getBookByID(id){
         for(let book of this.booksMas)
@@ -96,9 +105,10 @@ class DataBase {
 }
 
 class Book{
-    constructor(author, name, id = db.getStaticMasSize(), location = 0){
+    constructor(author, name, date = '01.01.2020', id = db.getStaticMasSize(), location = 0){
         this.author = author
         this.name = name
+        this.date = date
         this.id = id
         this.location = location
         if(id == db.getStaticMasSize())
@@ -120,7 +130,7 @@ class User{
     getBook(bookID){
         let db = new DataBase()
         let receivedBook = db.getBookByID(bookID)
-        let book = new Book(receivedBook.author, receivedBook.name, receivedBook.id, receivedBook.location)
+        let book = new Book(receivedBook.author, receivedBook.name, receivedBook.date, receivedBook.id, receivedBook.location)
 
         if(book && !book.location) {
             this.books.push(book)
@@ -158,9 +168,15 @@ class User{
 }
 
 function initDataBase(){
-    fs.writeFileSync('./DataBase.json', JSON.stringify({currentUserName: '', userMas: [], booksMas: [], staticMas: [1]}))
-    db = new DataBase()
-    db.addUser(new User('admin', 'admin'))
+    try {
+        JSON.parse(fs.readFileSync('./DataBase.json'))
+    }
+    catch (e) {
+        fs.writeFileSync('./DataBase.json', JSON.stringify({currentUserName: '', userMas: [], booksMas: [], staticMas: [1]}))
+        db = new DataBase()
+        db.addUser(new User('admin', 'admin'))
+    }
+
 }
 
 module.exports = {
@@ -169,3 +185,4 @@ module.exports = {
         User: User,
         Book: Book
 }
+

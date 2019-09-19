@@ -1,14 +1,64 @@
-h1 #{book.name}
-    h2 Книга номер #{book.id}
-    if(!book.location)
-        a(href=/take/ + book.id) Взять книгу
-    else if(book.location == userId)
-        a(href=/returnBook/ + book.id) Вернуть книгу
-    else
-        h2 Книга в распоряжении пользователя #{book.location}
+html
+    head
+        style.
+            a:link {
+                color: green;
+                background-color: transparent;
+                text-decoration: none;
+            }
 
-h2
-    a(href='/booksList') Перейти к списку всех книг
+            a:visited {
+                color: RGB(0, 0, 250);
+                background-color: transparent;
+                text-decoration: none;
+            }
 
-h2
-    a(href=/changeBookPage/ + book.id) Изменить информацию о книге
+            a:hover {
+                color: red;
+                background-color: transparent;
+                text-decoration: underline;
+            }
+
+            a:active {
+                color: yellow;
+                background-color: transparent;
+                text-decoration: underline;
+            }
+
+            body {
+                background-color: RGB(200, 200, 100); /* Цвет фона веб-страницы */
+            }
+
+            .headerStyle {
+                margin: 10px 100px;
+                position: absolute;
+                left: 30%
+            }
+
+            p {
+                text-align: left;
+                font-size: 300%;
+            }
+
+    body
+        h2.headerStyle Карточка книги: #{book.name}
+        a(href='/booksList') Перейти к списку всех книг
+        br
+        a(href=/changeBookPage/ + book.id) Изменить информацию о книге
+
+        p
+            | Название книги: #{book.name}
+            br
+            | Автор книги: #{book.author}
+            br
+            | Идентификатор книги: #{book.id}
+
+            if(book.location == 0)
+                div Книга находится в библиотеке, есть возможность
+                    a(href=/take/ + book.id) &nbsp взять книгу
+            else if(book.location == userId)
+                div Книга у Вас, вы должны вернуть её к #{book.date}
+                a(href=/returnBook/ + book.id) Вернуть книгу
+            else
+                h2 Книга находится не в библиотеке книга в распоряжении пользователя #{userName}
+
