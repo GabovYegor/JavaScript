@@ -1,47 +1,6 @@
 html
     head
-        style.
-            .headerStyle {
-                margin: 10px 100px;
-                position: absolute;
-                left: 30%
-            }
-
-            a:link {
-                color: green;
-                background-color: transparent;
-                text-decoration: none;
-            }
-
-            a:visited {
-                color: RGB(0, 0, 250);
-                background-color: transparent;
-                text-decoration: none;
-            }
-
-            a:hover {
-                color: red;
-                background-color: transparent;
-                text-decoration: underline;
-            }
-
-            a:active {
-                color: yellow;
-                background-color: transparent;
-                text-decoration: underline;
-            }
-
-            body {
-                background-color: RGB(200, 200, 100); /* Цвет фона веб-страницы */
-            }
-
-            .liStyle {
-                list-style-position: inside;
-                border: 2px solid black;
-                margin: 10px 10px;
-                width: 700px;
-            }
-
+        link(href='public/allStyles.css', rel='stylesheet')
     body
         h2.headerStyle Профиль пользователя с именем: #{user.username}
         a(href='/') Перейти к регистрации пользователя
@@ -59,7 +18,7 @@ html
                             br
                             | Автор: #{val.author}
                             br
-                            | Необходимо вернуть к #{val.date}
+                            | Необходимо вернуть через #{val.date} дней
                             br
                             a(href='/bookCard/' + val.id)  Перейти к карточке книги
                             br

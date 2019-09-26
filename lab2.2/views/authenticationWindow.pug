@@ -1,28 +1,8 @@
 html
     head
-        //script(src="../public/someJSCode.js")
-        style.
-            .mystyle {
-                border-style: double; /* Стиль линии вокруг параграфа */
-                padding: 5px; /* Поля вокруг текста */
-                width: 300px;
-                background-color: RGB(200, 200, 200);
-                position: absolute;
-                left: 35%;
-                top: 15%;
-            }
+        link(href='public/allStyles.css', rel='stylesheet')
 
-            .LOGWITHPASSPORT {
-                position: absolute;
-                left: 35%;
-                top: 10%;
-            }
-
-            body {
-                background-color: RGB(200, 200, 100); /* Цвет фона веб-страницы */
-            }
-
-    body(onload='myFunction()')
+    body
         h2.LOGWITHPASSPORT LOGIN WITH PASSPORT:
         form.mystyle(action='/login' method='post')
             label

@@ -1,22 +1,22 @@
 html
     head
+        //link(href='public/allStyles.css', rel='stylesheet')
         style.
-            .headerStyle {
-                margin: 10px 100px;
-                position: absolute;
-                left: 30%
-            }
-
-            body {
-                background-color: RGB(200, 200, 100); /* Цвет фона веб-страницы */
-            }
-
             form {
                 position: absolute;
                 left: 36%;
                 top: 7%
             }
 
+            body {
+                background-color: RGB(200, 200, 100)
+            }
+
+            .headerStyle {
+                margin: 10px 100px;
+                position: absolute;
+                left: 30%
+            }
     body
         h1.headerStyle  Изменить информацию о книге
         form(action='/changeBookAction' method='post')
@@ -33,7 +33,7 @@ html
                 input(name='newAuthor' type='text' placeholder='new Author' value= defaultAuthor style='margin: 10px 85px')
             br
             label
-                | Необходимо вернуть к
+                | Необходимо вернуть через
                 input(name='newDate' type='text' placeholder='new Date' value= defaultDate style='margin: 10px 65px')
             br
             label

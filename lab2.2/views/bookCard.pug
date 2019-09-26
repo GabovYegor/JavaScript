@@ -1,32 +1,13 @@
 html
     head
         style.
-            a:link {
-                color: green;
-                background-color: transparent;
-                text-decoration: none;
-            }
-
-            a:visited {
-                color: RGB(0, 0, 250);
-                background-color: transparent;
-                text-decoration: none;
-            }
-
-            a:hover {
-                color: red;
-                background-color: transparent;
-                text-decoration: underline;
-            }
-
-            a:active {
-                color: yellow;
-                background-color: transparent;
-                text-decoration: underline;
+            p {
+                text-align: left;
+                font-size: 300%;
             }
 
             body {
-                background-color: RGB(200, 200, 100); /* Цвет фона веб-страницы */
+                background-color: RGB(200, 200, 100)
             }
 
             .headerStyle {
@@ -34,14 +15,8 @@ html
                 position: absolute;
                 left: 30%
             }
-
-            p {
-                text-align: left;
-                font-size: 300%;
-            }
-
     body
-        h2.headerStyle Карточка книги: #{book.name}
+        h1.headerStyle Карточка книги: #{book.name}
         a(href='/booksList') Перейти к списку всех книг
         br
         a(href=/changeBookPage/ + book.id) Изменить информацию о книге
@@ -57,8 +32,8 @@ html
                 div Книга находится в библиотеке, есть возможность
                     a(href=/take/ + book.id) &nbsp взять книгу
             else if(book.location == userId)
-                div Книга у Вас, вы должны вернуть её к #{book.date}
+                div Книга у Вас, вы должны вернуть её через #{book.date} дней
                 a(href=/returnBook/ + book.id) Вернуть книгу
             else
-                h2 Книга находится не в библиотеке книга в распоряжении пользователя #{userName}
+                h2 Книга находится не в библиотеке книга в распоряжении пользователя #{userName}. Должен вернуть книгу через #{book.date} дней
 

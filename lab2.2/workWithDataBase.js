@@ -48,8 +48,10 @@ class DataBase {
     }
 
     addUser (user) {
-        this.userMas.push(user)
-        this.updateDataBase()
+        if(this.getUserByName(user.username) === 1) {
+            this.userMas.push(user)
+            this.updateDataBase()
+        }
     }
 
     getUserCount() { return this.userMas.length }
@@ -105,7 +107,7 @@ class DataBase {
 }
 
 class Book{
-    constructor(author, name, date = '01.01.2020', id = db.getStaticMasSize(), location = 0){
+    constructor(author, name, date = Math.floor(Math.random() * Math.floor(30)), id = db.getStaticMasSize(), location = 0){
         this.author = author
         this.name = name
         this.date = date
@@ -131,7 +133,6 @@ class User{
         let db = new DataBase()
         let receivedBook = db.getBookByID(bookID)
         let book = new Book(receivedBook.author, receivedBook.name, receivedBook.date, receivedBook.id, receivedBook.location)
-
         if(book && !book.location) {
             this.books.push(book)
             book.location = this.id

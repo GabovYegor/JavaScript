@@ -17,7 +17,9 @@ router.get('/take/:id', passport.authenticationMiddleware(), takeBook)
 router.get('/returnBook/:id', passport.authenticationMiddleware(), returnBook)
 router.get('/changeBookPage/:id', passport.authenticationMiddleware(), changeBookPage)//(req, res) => { res.render('changeBook', {ID: req.params.id}) })
 router.post('/changeBookAction', passport.authenticationMiddleware(), changeBook)
+router.post('/booksList', passport.authenticationMiddleware(), printBooksListWithFilter)
 router.get('/booksList', passport.authenticationMiddleware(), printBooksList)
+router.post('/test', test)
 
 // вынести в функцию
 router.post('/addBook', passport.authenticationMiddleware(),
@@ -90,6 +92,39 @@ function printBooksList(req, res){
     })
 }
 
+function printBooksListWithFilter(req, res){
+    let db = new fileWork.DataBase()
+    let receivedBooks = db.getBooksMas()
+    let books = []
+    switch (req.body.select) {
+        case 'onHand':
+            for(let i = 0; i < receivedBooks.length; ++i){
+                if(receivedBooks[i].location === 0){
+                    books.push(receivedBooks[i])
+                }
+            }
+            break
+
+        case 'all':
+            books = receivedBooks
+            break
+
+        case 'date':
+            books = receivedBooks
+            books.sort(function (a, b) {
+                return a.date > b.date
+            })
+            break
+        default:
+            console.log('printBooksListWithFilter fail')
+    }
+
+    res.render('booksList', {
+        books: books,
+        db: db
+    })
+}
+
 function takeBook(req, res){
     let data = db.getCurrentUser()
     let user = new fileWork.User(data.username, data.password, data.books, data.id, true)
@@ -136,6 +171,12 @@ function changeBook(req, res){
     user.books.push(book)
     db.updateUser(user)
     res.redirect('/booksList')
+}
+
+function test(req, res){
+    console.log('test function')
+    console.log(req.body.form)
+    res.sendStatus(200)
 }
 
 module.exports = router
