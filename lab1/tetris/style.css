@@ -1,0 +1,9 @@
+.calc {
+    margin-top: 20px;
+    border: 6px solid #aeaeae;
+    padding: 20px 40px;
+}
+#result_multi {
+    font-size: 20px;
+    font-weight: 900;
+}

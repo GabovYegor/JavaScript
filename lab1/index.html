@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<body>
+<head>
+  <title> Tetris </title>
+    <meta charset="utf-8">
+
+</head>
+
+<h1 style="color: brown; font-size: 50px; margin: 20px 100px"> My Tetris </h1>
+    <h2 style="color: red; font-size: 30px; margin: 10px 100px"> Input player name:</h2>
+
+<script>
+  function saveUserNameAndGoPlay() {
+      alert("you are logged in as: " + document.getElementById('username').value)
+      if(localStorage.getItem('players') != null) {
+          //localStorage.setItem('userName', document.getElementById('username').value);
+          masPlayers = JSON.parse(localStorage.getItem(localStorage['players']))
+      }
+
+      window.location = "/tetris";
+  }
+</script>
+
+<form action="/tetris" method="GET">
+  <input placeholder="hello" size="30" id = "username" style="margin: 10px 100px"><br>
+    <input type="button" value="click me" style="height:30px; width:70px; margin: 10px 100px" onclick="saveUserNameAndGoPlay()">
+</form>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+html
+    head
+        link(href='public/allStyles.css', rel='stylesheet')
+    body
+        h2.headerStyle Профиль пользователя с именем: #{user.username}
+        a(href='/') Перейти к регистрации пользователя
+        br
+        a(href='/booksList') Перейти к полному списку книг
+
+        if(user.books.length == 0)
+            h2 У пользователя нет книг. Вы можете взять их в библиотеке
+        else
+            h2 Список книг у пользователя в наличии:
+                ol
+                    each val in user.books
+                        li.liStyle
+                            | Название книги: #{val.name}
+                            br
+                            | Автор: #{val.author}
+                            br
+                            | Необходимо вернуть через #{val.date} дней
+                            br
+                            a(href='/bookCard/' + val.id)  Перейти к карточке книги
+                            br
+                            br
+

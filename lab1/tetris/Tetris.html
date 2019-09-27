@@ -1,0 +1,484 @@
+
+<!-- saved from url=(0029)http://localhost:7777/tetris/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>
+        Tetris
+    </title>
+</head>
+<body>
+<div id="d1" style="position:absolute; top:250px; z-index:1">
+    <canvas id="canvas" width="1200" height="700">
+        Your browser does not support HTML5 Canvas.
+    </canvas>
+</div>
+    <h1 id="Pname" <="" h1="">Player egor</h1><h2 id="score">Score 0</h2>
+    <h2 id="level">LEVEL 1</h2>
+    <h2> Next figure:</h2>
+    <script>
+        document.getElementById('Pname').innerHTML = "Player " + localStorage['userName'];
+        canvas = document.getElementById("canvas")
+        ctx = canvas.getContext('2d');
+        ctx.fillStyle = "rgb(200, 200, 200)";
+        gameover = false;
+
+        var playField = {
+            score: -10,
+            level: 1,
+            speed: 100,
+            length: 18,
+            width: 10,
+            squareSize: 25,
+            lengthBetweenSquare: 4,
+            tetrisBeginPointX: 250,
+            tetrisBeginPointY: 0,
+            masField: new Array(length),
+
+            getSpeed: function () {
+                switch (this.level) {
+                    case  1:
+                        return 150
+                    case 2:
+                        return 100
+                    case 3:
+                        return 50
+                }
+            },
+
+            updateLevel: function(){
+                if(this.score >=0 && this.score <= 30)
+                    document.getElementById('level').innerHTML = "LEVEL 1";
+                if(this.score >= 30 && this.score <= 60)
+                    document.getElementById('level').innerHTML = "LEVEL 2";
+                if(this.score >= 60)
+                    document.getElementById('level').innerHTML = "LEVEL 3";
+            },
+
+            updateScore: function () {
+                this.score += 10;
+                console.log(this.score)
+                document.getElementById('score').innerHTML = "Score " + this.score;
+            },
+
+            InitPlayField: function () {
+                this.updateScore()
+                this.updateLevel()
+                for (i = 0; i < this.width; ++i) {
+                    for (j = 0; j < this.length; ++j) {
+                        this.masField[i] = new Array(this.length)
+                    }
+                }
+
+                for (i = 0; i < this.width; ++i) {
+                    for (j = 0; j < this.length; ++j) {
+                        this.masField[i][j] = {
+                            x: i * (this.squareSize + this.lengthBetweenSquare) + this.tetrisBeginPointX,
+                            y: j * (this.squareSize + this.lengthBetweenSquare) + this.tetrisBeginPointY,
+                            isFill: false,
+                            isMove: false
+                        }
+                    }
+                }
+            },
+
+            deleteRow: function(rowFromDelete) {
+                for(j = rowFromDelete; j > 0; --j) {
+                    for (i = 0; i < this.width; ++i) {
+                        this.masField[i][j].isFill = this.masField[i][j-1].isFill
+                    }
+                }
+                this.updateScore()
+                this.updateLevel()
+            },
+
+            drawPlayField: function () {
+                for (i = 0; i < this.width; ++i) {
+                    for (j = 0; j < this.length; ++j) {
+                        if(this.masField[i][j].isFill) {
+                            ctx.fillStyle = "rgb(50, 50, 100)";
+                            ctx.fillRect(this.masField[i][j].x, this.masField[i][j].y, this.squareSize, this.squareSize);
+                        }
+                        else if (this.masField[i][j].isMove){
+                            ctx.fillStyle = "rgb(150, 50, 100)";
+                            ctx.fillRect(this.masField[i][j].x, this.masField[i][j].y, this.squareSize, this.squareSize);
+                            this.masField[i][j].isMove = false;
+                        }
+                        else {
+                            ctx.fillStyle = "rgb(200, 200, 200)";
+                            ctx.fillRect(this.masField[i][j].x, this.masField[i][j].y, this.squareSize, this.squareSize);
+                        }
+                    }
+                }
+
+                // проверка на удаление строки
+                for(i = 0; i < this.length; ++i){
+                    countFilled = 0;
+                    for(j = 0; j < this.width; ++j){
+                        if(this.masField[j][i].isFill)
+                            ++countFilled
+                    }
+                    if(countFilled == this.width)
+                        this.deleteRow(i)
+                }
+
+                for(i = 0; i < this.width; ++i) {
+                    if (this.masField[i][0].isFill) {
+                        alert('gameOver')
+                        gameover = true;
+                        localStorage.setItem(localStorage['userName'], JSON.stringify([this.level, this.score]));
+                        //window.location = "/tetris/recordTable";
+                        break;
+                    }
+                }
+            },
+
+            drawFigure: function (figure, timerDescriptor) {
+                    for(coord of figure.coords) {
+                        this.masField[coord.x][coord.y].isMove = true;
+                    }
+
+                    for(coord of figure.coords) {
+                        if(coord.y == this.length - 1 || this.masField[coord.x][coord.y + 1].isFill) {
+                            for (coordToFill of figure.coords) {
+                                this.masField[coordToFill.x][coordToFill.y].isFill = true;
+                                this.masField[coordToFill.x][coordToFill.y].isMove = false;
+                            }
+
+                            this.drawPlayField()
+                            return 1;
+                            break;
+                        }
+                    }
+
+                    this.drawPlayField()
+                    return 0;
+            }
+        }
+
+        var futureField = {
+            squareSize: 25,
+            lengthBetweenSquare: 4,
+            masForNextFigure: new Array(length),
+
+            InitFutureField: function () {
+                for(i = 0; i < 4; ++i){
+                    for(j = 0; j < 4; ++j){
+                        this.masForNextFigure[i] = new Array(4)
+                    }
+                }
+
+                for(i = 0; i < 4; ++i){
+                    for(j = 0; j < 4; ++j){
+                        this.masForNextFigure[i][j] = {x: i * (this.squareSize + this.lengthBetweenSquare),
+                                                  y: j * (this.squareSize + this.lengthBetweenSquare),
+                                                  isFill: false}
+                    }
+                }
+            },
+
+            drawFutureFigure: function (figure) {
+                for(i = 0; i < 4; ++i)
+                    for (j = 0; j < 4; ++j)
+                        this.masForNextFigure[i][j].isFill = false
+
+                for (coordToFill of figure)
+                    this.masForNextFigure[coordToFill.x][coordToFill.y].isFill = true;
+                this.drawFutureField()
+            },
+
+            drawFutureField: function () {
+                for(i = 0; i < 4; ++i) {
+                    for (j = 0; j < 4; ++j) {
+                        if (this.masForNextFigure[i][j].isFill) {
+                            ctx.fillStyle = "rgb(50, 50, 100)";
+                            ctx.fillRect(this.masForNextFigure[i][j].x, this.masForNextFigure[i][j].y, this.squareSize, this.squareSize);
+                        } else {
+                            ctx.fillStyle = "rgb(200, 200, 200)";
+                            ctx.fillRect(this.masForNextFigure[i][j].x, this.masForNextFigure[i][j].y, this.squareSize, this.squareSize);
+                        }
+                    }
+                }
+            }
+        }
+
+        class Square{
+            constructor(){
+                this.coords = new Array(4)
+                this.coords = [{x: 4, y: -1}, {x: 4, y: 0}, {x: 5, y: -1}, {x: 5, y: 0}]
+            }
+
+            forFuture(){
+                return [{x: 2, y: 1}, {x: 2, y: 2}, {x: 1, y: 1}, {x: 1, y: 2}]
+            }
+
+            rotate(){
+            }
+        }
+
+        class Line {
+            constructor() {
+                this.coords = new Array(4)
+                this.coords = [{x: 3, y: -1}, {x: 4, y: -1}, {x: 5, y: -1}, {x: 6, y: -1}]
+                this.rotateStyle = false;
+            }
+
+            forFuture(){
+                return [{x: 0, y: 2}, {x: 1, y: 2}, {x: 2, y: 2}, {x: 3, y:     2}]
+            }
+
+            rotate() {
+                 i = 0
+                 if(this.coords[0].x == this.coords[1].x) {
+                     i = 0
+                     if (this.rotateStyle){
+                         this.rotateStyle = !this.rotateStyle
+                         for (coord of this.coords) {
+                             coord.y = this.coords[0].y
+                             coord.x = this.coords[0].x + i
+                             i++;
+                         }
+                     }
+                     else {
+                         this.rotateStyle = !this.rotateStyle;
+                         for (coord of this.coords) {
+                             coord.y = this.coords[0].y
+                             coord.x = this.coords[0].x - i
+                             i++;
+                         }
+                     }
+                 }
+                 else{
+                     if(this.rotateStyle) {
+                         for (coord of this.coords) {
+                             coord.x = this.coords[0].x
+                             coord.y = this.coords[0].y + i
+                             i++;
+                         }
+                     }
+                     else{
+                         for (coord of this.coords) {
+                             coord.x = this.coords[0].x
+                             coord.y = this.coords[0].y - i
+                             i++;
+                         }
+                     }
+                 }
+            }
+        }
+
+        class HorseR{
+            constructor(){
+                this.coords = new Array(4)
+                this.coords = [{x: 4, y: -1}, {x: 5, y: -1}, {x: 6, y: -1}, {x: 6, y: 0}]
+            }
+
+            wasRotate = false;
+            rotate() {
+                if (!this.wasRotate) {
+                    this.wasRotate = !this.wasRotate;
+                    this.coords[0].x += 2;
+                    this.coords[0].y += 2;
+                    this.coords[1].x += 1;
+                    this.coords[1].y += 1;
+                    this.coords[3].x += 1;
+                    this.coords[3].y -= 1;
+                }
+                else{
+                    this.wasRotate = !this.wasRotate;
+                    this.coords[0].x -= 2;
+                    this.coords[0].y -= 2;
+                    this.coords[1].x -= 1;
+                    this.coords[1].y -= 1;
+                    this.coords[3].x -= 1;
+                    this.coords[3].y += 1;
+                }
+            }
+            forFuture(){
+                return [{x: 0, y: 2}, {x: 1, y: 2}, {x: 2, y: 2}, {x: 2, y: 3}]
+            }
+        }
+
+        class HorseL{
+            constructor(){
+                this.coords = new Array(4)
+                this.coords = [{x: 4, y: 0}, {x: 5, y: 0}, {x: 6, y: 0}, {x: 6, y: -1}]
+            }
+            wasRotate = false;
+            rotate(){
+                if (!this.wasRotate) {
+                    this.wasRotate = !this.wasRotate;
+                    this.coords[0].x += 2;
+                    this.coords[0].y += 2;
+                    this.coords[1].x += 1;
+                    this.coords[1].y += 1;
+                    this.coords[3].x -= 1;
+                    this.coords[3].y += 1;
+                }
+                else{
+                    this.wasRotate = !this.wasRotate;
+                    this.coords[0].x -= 2;
+                    this.coords[0].y -= 2;
+                    this.coords[1].x -= 1;
+                    this.coords[1].y -= 1;
+                    this.coords[3].x += 1;
+                    this.coords[3].y -= 1;
+                }
+            }
+            forFuture(){
+                return [{x: 1, y: 2}, {x: 2, y: 2}, {x: 3, y: 2}, {x: 3, y: 3}]
+            }
+        }
+
+        class TForm{
+            constructor(){
+                this.coords = new Array(4)
+                this.coords = [{x: 4, y: -1}, {x: 5, y: -1}, {x: 6, y: -1}, {x: 5, y: 0}]
+            }
+            wasRotate = false;
+            rotate() {
+                if (!this.wasRotate) {
+                    this.wasRotate = !this.wasRotate
+                    this.coords[0].x++;
+                    this.coords[0].y--;
+                }
+                else {
+                    this.wasRotate = !this.wasRotate
+                    this.coords[0].x--
+                    this.coords[0].y++
+                }
+            }
+            forFuture(){
+                return [{x: 1, y: 2}, {x: 2, y: 2}, {x: 3, y: 2}, {x: 2, y: 3}]
+            }
+        }
+
+        class ZZFormR{
+            constructor(){
+                this.coords = new Array(4)
+                this.coords = [{x: 5, y: -1}, {x: 6, y: -1}, {x: 4, y: 0}, {x: 5, y: 0}]
+            }
+            wasRotate = false;
+
+            rotate(){
+                if(!this.wasRotate) {
+                    this.wasRotate = !this.wasRotate
+                    this.coords[2].x += 2;
+                    this.coords[2].y -= 2;
+                }
+                else{
+                    this.wasRotate = !this.wasRotate
+                    this.coords[2].x -= 2;
+                    this.coords[2].y += 2
+                }
+            }
+            forFuture(){
+                return [{x: 1, y: 3}, {x: 2, y: 2}, {x: 2, y: 3}, {x: 3, y: 2}]
+            }
+        }
+
+        class ZZFormL{
+            constructor(){
+                this.coords = new Array(4)
+                this.coords = [{x: 4, y: -1}, {x: 5, y: -1}, {x: 5, y: 0}, {x: 6, y: 0}]
+            }
+            wasRotate = false;
+            rotate(){
+                if(!this.wasRotate) {
+                    this.wasRotate = !this.wasRotate
+                    this.coords[0].x += 2;
+                    this.coords[0].y += 2;
+                }
+                else{
+                    this.wasRotate = !this.wasRotate
+                    this.coords[0].x -= 2;
+                    this.coords[0].y -= 2
+                }
+            }
+            forFuture(){
+                return [{x: 0, y: 2}, {x: 1, y: 2}, {x: 1, y: 3}, {x: 2, y: 3}]
+            }
+        }
+
+        playField.InitPlayField()
+        playField.drawPlayField()
+        futureField.InitFutureField()
+        futureField.drawFutureField()
+
+        function moveDown(figure) {
+            for(coord of figure.coords)
+                ++coord.y
+        }
+
+        function moveRight(figure){
+            for(coord of figure.coords)
+                if(coord.x == playField.width - 1 ||
+                    playField.masField[coord.x + 1][coord.y].isFill) return;
+            for(coord of figure.coords)
+                ++coord.x;
+        }
+
+        function moveLeft(figure){
+            for(coord of figure.coords)
+                if(!coord.x ||
+                    playField.masField[coord.x - 1][coord.y].isFill) return;
+            for(coord of figure.coords)
+                --coord.x;
+        }
+
+        function chooseFigure() {
+            switch (Math.round(Math.random() * (7 - 1) + 1)) {
+                case 1 : return new Square();
+                case 2 : return new Line();
+                case 3 : return new HorseR();
+                case 4 : return  new HorseL()
+                case 5 : return new TForm()
+                case 6 : return new ZZFormL()
+                case 7 : return new ZZFormR()
+            }
+        }
+
+        futureFigure = chooseFigure()
+        futureFigure = chooseFigure()
+        futureField.drawFutureFigure(futureFigure.forFuture())
+        var aimFigure = chooseFigure()
+        interval = setInterval(run, playField.getSpeed(), aimFigure);
+        function run(figure) {
+            moveDown(figure)
+            if (playField.drawFigure(figure, interval)) {
+                clearInterval(interval)
+                if(!gameover) {
+                    aimFigure = futureFigure
+                    futureFigure = chooseFigure()
+                    futureField.drawFutureFigure(futureFigure.forFuture())
+                    futureField.drawFutureField()
+                    interval = setInterval(run, playField.getSpeed(), aimFigure)
+                }
+            }
+        }
+
+        document.addEventListener("keydown", function (e) {
+            if(e.keyCode == 39)
+                moveRight(aimFigure)
+
+            if(e.keyCode == 37)
+                moveLeft(aimFigure)
+
+            if(e.keyCode == 38)
+                aimFigure.rotate()
+
+            if(e.keyCode == 40) {
+                clearInterval(interval)
+                interval = setInterval(run, 10, aimFigure)
+            }
+        })
+
+        document.addEventListener("keyup", function (e) {
+            if(e.keyCode == 40) {
+                clearInterval(interval)
+                interval = setInterval(run, playField.getSpeed(), aimFigure)
+            }
+        })
+
+    </script>
+
+</body></html>
