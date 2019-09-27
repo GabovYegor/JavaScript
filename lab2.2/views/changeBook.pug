@@ -1,0 +1,43 @@
+html
+    head
+        //link(href='public/allStyles.css', rel='stylesheet')
+        style.
+            form {
+                position: absolute;
+                left: 36%;
+                top: 7%
+            }
+
+            body {
+                background-color: RGB(200, 200, 100)
+            }
+
+            .headerStyle {
+                margin: 10px 100px;
+                position: absolute;
+                left: 30%
+            }
+    body
+        h1.headerStyle  Изменить информацию о книге
+        form(action='/changeBookAction' method='post')
+            label
+                | ID
+                input(name='ID' type='text' placeholder='ID' readonly=true value= ID style='margin: 10px 200px;')
+            br
+            label
+                | Новое название книги
+                input(name='newName' type='text' placeholder='new Name' value= defaultName style='margin: 10px 67px;')
+            br
+            label
+                | Новый автор книги
+                input(name='newAuthor' type='text' placeholder='new Author' value= defaultAuthor style='margin: 10px 85px')
+            br
+            label
+                | Необходимо вернуть через
+                input(name='newDate' type='text' placeholder='new Date' value= defaultDate style='margin: 10px 65px')
+            br
+            label
+                | Новый хозяин книги
+                input(name='newLocation' type='text' placeholder='new Location' value= defaultLocation style='margin: 10px 78px')
+            br
+            input(type='submit' style='margin: 10px 230px' value='Редактировать книгу')
