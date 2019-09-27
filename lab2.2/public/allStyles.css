@@ -1,0 +1,74 @@
+.mystyle {
+    border-style: double;
+    padding: 5px;
+    width: 300px;
+    background-color: RGB(200, 200, 200);
+    position: absolute;
+    left: 35%;
+    top: 15%;
+}
+
+.LOGWITHPASSPORT {
+    position: absolute;
+    left: 35%;
+    top: 10%;
+}
+
+body {
+    background-color: RGB(200, 200, 100)
+}
+
+a:link {
+    color: green;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+a:visited {
+    color: RGB(0, 0, 250);
+    background-color: transparent;
+    text-decoration: none;
+}
+
+a:hover {
+    color: red;
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+a:active {
+    color: yellow;
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+.headerStyle {
+    margin: 10px 100px;
+    position: absolute;
+    left: 30%
+}
+
+.liStyle {
+    list-style-position: inside;
+    border: 2px solid black;
+    margin: 10px 10px;
+    width: 700px;
+}
+
+.oddliStyle {
+    list-style-position: inside;
+    border: 2px solid black;
+    margin: -30px 954px;
+    width: 700px;
+}
+
+.olTwoColumn {
+    columns: 2;
+}
+
+.selectStyle{
+    position: absolute;
+    left: 3%;
+    top: 10%;
+    font-size: 1200%;
+}
