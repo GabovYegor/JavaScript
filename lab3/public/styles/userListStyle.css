@@ -1,0 +1,8 @@
+body {
+  background-color: #bebe64;
+}
+.selected {
+  width: 200px;
+  border-color: firebrick;
+  border-style: inset;
+}

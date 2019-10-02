@@ -22,8 +22,3 @@ gulp.task('views', function () {
         .pipe(pug())
         .pipe(gulp.dest('default'))
 })
-
-function hello(callback) {
-    console.log("Hello")
-    callback()
-}

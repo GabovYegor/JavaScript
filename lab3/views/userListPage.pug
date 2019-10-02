@@ -1,0 +1,22 @@
+html
+    head
+        link(href='/public/styles/userListStyle.css' rel='stylesheet')
+        script(src="https://code.jquery.com/jquery-3.3.1.min.js")
+        script(src="public/JQueryCode/userListCode.js")
+    body
+        h1 Auction member list
+        ol
+            each user in users
+                li
+                    | ID:
+                    span#ID #{user.ID}
+                    br
+                    | Name:
+                    span#userName #{user.userName}
+                    br
+                    | amount of money:
+                    span#amountOfMoney #{user.amountOfMoney}
+                    br
+
+        form(action='/addUserPage' method="GET")
+            input(type='submit' value='Add new user')

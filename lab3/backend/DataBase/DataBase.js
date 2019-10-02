@@ -20,6 +20,11 @@ class DataBase {
         this.updateDataBase()
     }
 
+    addUserToDataBase(newUser){
+        this.users.push(newUser)
+        this.updateDataBase()
+    }
+
     getPictureByID(ID){
         for(let picture of this.pictures)
             if(picture.ID == ID)
@@ -33,28 +38,42 @@ class DataBase {
         this.updateDataBase()
     }
 
+    changeUser(newUser){
+        for(let i = 0; i < this.users.length; ++i)
+            if(this.users[i].ID == newUser.ID)
+                this.users[i] = newUser
+        this.updateDataBase()
+    }
+
     getPictureNumder(){
         return this.pictures.length;
+    }
+
+    getUserNumder(){
+        return this.users.length;
     }
 
     getPicturesMas(){
         return this.pictures
     }
 
+    getUsersMas(){
+        return this.users
+    }
+
     removePictureFromDataBaseByID(ID){
-        for(let i = 0; i < this.pictures.length; ++i){
-            if(this.pictures[i].ID == ID){
+        for(let i = 0; i < this.pictures.length; ++i)
+            if(this.pictures[i].ID == ID)
                 this.pictures.splice(i, 1)
-            }
-        }
         this.updateDataBase()
     }
 
-    addUserToDataBase(newUser){
-        this.users.push(newUser)
+    addPictureToAuctionByID(ID){
+        for(let i = 0; i < this.pictures.length; ++i)
+            if(this.pictures[i].ID == ID)
+                this.pictures[i].isInAuction = true;
         this.updateDataBase()
     }
-
 
     updateDataBase(){
         fs.writeFileSync('./DataBase/DataBase.json', JSON.stringify({ pictures: this.pictures, users: this.users }))
