@@ -20,7 +20,15 @@ html
             input(name='imagePath' type='text' placeholder='Picture image' value= picture.imagePath)
             br
 
+            label Picture description:
+            textarea(name='description' placeholder='Picture description') #{picture.description}
+            br
+
+            label Picture start price:
+            input(name='startPrice' type='text' placeholder='Picture start price' value= picture.startPrice)
+            br
+
             input(type='submit' value='change picture')
 
-        form(action='/addPictureToAuction/' + picture.ID method='GET')
-            input(type='submit' value='add Picture to auction')
+        form(action='/pictureActionAuction/' + picture.ID method='GET')
+            input(type='submit' value='add/remove Picture to/from auction')

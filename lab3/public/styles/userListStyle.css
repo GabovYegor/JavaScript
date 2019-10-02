@@ -6,3 +6,6 @@ body {
   border-color: firebrick;
   border-style: inset;
 }
+#removeID {
+  width: 100px;
+}

@@ -10,9 +10,11 @@ router.get('/addUserPage', middleware.loadAddUserPage)
 router.post('/addPictureAction', middleware.addPictureAction)
 router.post('/addUserAction', middleware.addUserAction)
 router.post('/removePictureAction', middleware.removePictureAction)
+router.post('/removeUserAction', middleware.removeUserAction)
 router.get('/loadPictureCard/:id', middleware.loadPictureCard)
 router.post('/changePictureAction', middleware.changePictureAction)
 router.post('/changeUserAction', middleware.changeUserAction)
-router.get('/addPictureToAuction/:id', middleware.addPictureToAuction)
+router.get('/pictureActionAuction/:id', middleware.pictureActionAuction)
+router.get('/userActionAuction/:id', middleware.userActionAuction)
 
 module.exports = router

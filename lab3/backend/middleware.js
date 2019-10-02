@@ -29,7 +29,7 @@ function loadAddUserPage(req, res) {
 function addPictureAction(req, res) {
     let imagePath = req.body.image
     if (!imagePath.length) { imagePath = 'default.png' }
-    (new DataBase()).addPictureToDataBase(new Picture('/public/images/' + imagePath, req.body.title, req.body.author))
+    (new DataBase()).addPictureToDataBase(new Picture('/public/images/' + imagePath, req.body.title, req.body.author, req.body.description, req.body.startPrice))
     res.redirect('/picturesListPage')
 }
 
@@ -44,6 +44,12 @@ function removePictureAction(req, res){
     res.redirect('/picturesListPage')
 }
 
+function removeUserAction(req, res){
+    db = new DataBase()
+    db.removeUserFromDataBaseByID(req.body.id)
+    res.redirect('/userListPage')
+}
+
 function loadPictureCard(req, res){
     res.render('pictureCardPage', {
         picture: (new DataBase()).getPictureByID(req.params.id)
@@ -51,18 +57,23 @@ function loadPictureCard(req, res){
 }
 
 function changePictureAction(req, res){
-    (new DataBase()).changePicture(new Picture(req.body.imagePath, req.body.title, req.body.author, false, req.body.ID))
+    (new DataBase()).changePicture(new Picture(req.body.imagePath, req.body.title, req.body.author, req.body.description, req.body.startPrice, false, req.body.ID))
     res.redirect('/loadPictureCard/' + req.body.ID)
 }
 
 function changeUserAction(req, res){
     (new DataBase()).changeUser(new User(req.body.userName, req.body.amountOfMoney,false, req.body.ID))
-    res.status(200)
+    res.sendStatus(200)
 }
 
 function addPictureToAuction(req, res){
-    (new DataBase()).addPictureToAuctionByID(req.params.id)
+    (new DataBase()).pictureActionAuctionByID(req.params.id)
     res.redirect('/loadPictureCard/' + req.params.id)
+}
+
+function addUserToAuction(req, res){
+    (new DataBase()).userActionAuctionByID(req.params.id)
+    res.sendStatus(200)
 }
 
 module.exports = {
@@ -73,9 +84,11 @@ module.exports = {
     addPictureAction: addPictureAction,
     addUserAction: addUserAction,
     removePictureAction: removePictureAction,
+    removeUserAction: removeUserAction,
     loadPictureCard: loadPictureCard,
     changePictureAction: changePictureAction,
     changeUserAction: changeUserAction,
     loadAuctionSettingsPage: loadAuctionSettingsPage,
-    addPictureToAuction: addPictureToAuction
+    pictureActionAuction: addPictureToAuction,
+    userActionAuction: addUserToAuction
 }

@@ -68,10 +68,24 @@ class DataBase {
         this.updateDataBase()
     }
 
-    addPictureToAuctionByID(ID){
+    removeUserFromDataBaseByID(ID){
+        for(let i = 0; i < this.users.length; ++i)
+            if(this.users[i].ID == ID)
+                this.users.splice(i, 1)
+        this.updateDataBase()
+    }
+
+    pictureActionAuctionByID(ID){
         for(let i = 0; i < this.pictures.length; ++i)
             if(this.pictures[i].ID == ID)
-                this.pictures[i].isInAuction = true;
+                this.pictures[i].isInAuction = !this.pictures[i].isInAuction;
+        this.updateDataBase()
+    }
+
+    userActionAuctionByID(ID){
+        for(let i = 0; i < this.users.length; ++i)
+            if(this.users[i].ID == ID)
+                this.users[i].isInAuction = !this.users[i].isInAuction;
         this.updateDataBase()
     }
 

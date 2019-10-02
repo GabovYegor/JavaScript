@@ -7,7 +7,8 @@ var getPictureID = (function () {
 }) ();
 
 class Picture{
-    constructor(imagePath = '/public/images/default.png', title = "defaultTitle", author = "defaultAuthor", isInAuction = false, ID = getPictureID()){
+    constructor(imagePath = '/public/images/default.png', title = "defaultTitle", author = "defaultAuthor", description = "defaultDescription",
+                startPrice = 0, isInAuction = false, ID = getPictureID()){
         this.imagePath = imagePath
         if(!fs.existsSync('..' + imagePath)) {
             console.log('unable to find file', imagePath)
@@ -16,6 +17,8 @@ class Picture{
 
         this.title = title
         this.author = author
+        this.description = description
+        this.startPrice = startPrice
         this.isInAuction = isInAuction
         this.ID = ID
     }
