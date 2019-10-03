@@ -16,5 +16,6 @@ router.post('/changePictureAction', middleware.changePictureAction)
 router.post('/changeUserAction', middleware.changeUserAction)
 router.get('/pictureActionAuction/:id', middleware.pictureActionAuction)
 router.get('/userActionAuction/:id', middleware.userActionAuction)
+router.post('/setUpAuction', middleware.setUpAuction)
 
 module.exports = router

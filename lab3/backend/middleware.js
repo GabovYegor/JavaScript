@@ -79,6 +79,11 @@ function addUserToAuction(req, res){
     res.sendStatus(200)
 }
 
+function setUpAuction(req, res){
+    (new DataBase()).setUpAuction(req.body)
+    res.sendStatus(200)
+}
+
 module.exports = {
     loadPictureListPage: loadPictureListPage,
     loadUserListPage: loadUserListPage,
@@ -93,5 +98,6 @@ module.exports = {
     changeUserAction: changeUserAction,
     loadAuctionSettingsPage: loadAuctionSettingsPage,
     pictureActionAuction: addPictureToAuction,
-    userActionAuction: addUserToAuction
+    userActionAuction: addUserToAuction,
+    setUpAuction: setUpAuction
 }

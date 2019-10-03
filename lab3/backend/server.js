@@ -8,7 +8,7 @@ app.set('view engine', 'pug');
 app.set('views', '../views')
 app.use('/', require('./router'))
 
-port = 8080
+port = 7777
 app.listen(port, function (err) {
     if (err) {
         throw err

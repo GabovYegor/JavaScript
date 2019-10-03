@@ -1,3 +1,13 @@
 body {
   background-color: #bebe64;
 }
+span {
+  margin-top: 20px;
+  font-size: 22px;
+  display: block;
+  /* Add this */
+  border: 1px solid red;
+  width: 200px;
+  border-width: 10px;
+  border-radius: 10px;
+}

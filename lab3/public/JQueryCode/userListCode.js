@@ -14,11 +14,9 @@ $(document).ready(() => {
                     '  Amount of money:<br>\n' +
                     '  <input type="text" placeholder="new amount of money" id="newAmountOfMoney"><br>\n' +
                     '  <button id="changeUserbtn">change user</button>' +
-                    '  <button id="addUserToAuction">add/remove user to/from auction</button>'
+                    '  <button id="addUserToAuction">add/remove user to/from auction</button>' +
+                    '  </div> '
                 )
-            } else {
-                $('li').removeClass('selected')
-                $('#form').remove()
             }
         }
     );
@@ -26,7 +24,7 @@ $(document).ready(() => {
     $(document).on('click', "#changeUserbtn", function() {
         $.post( "/changeUserAction", {userName: $(this).closest('li').find('#newUserName').val(),
                                       amountOfMoney: $(this).closest('li').find('#newAmountOfMoney').val(),
-                                      ID: 3}, changeUser($(this).closest('li').find('#userName'), $(this).closest('li').find('#newUserName').val(),
+                                      ID: $(this).closest('li').find('#ID').text()}, changeUser($(this).closest('li').find('#userName'), $(this).closest('li').find('#newUserName').val(),
                                                          $(this).closest('li').find('#amountOfMoney'), $(this).closest('li').find('#newAmountOfMoney').val()), "json" );
     });
 
