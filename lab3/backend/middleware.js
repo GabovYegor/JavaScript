@@ -1,9 +1,12 @@
 const DataBase = require('./DataBase/DataBase')
-const Picture = require('./DataBase/Picture')
-const User= require('./DataBase/User')
+const Picture  = require('./DataBase/Picture')
+const User     = require('./DataBase/User')
+const AuctionSettings = require('./DataBase/auctionSettings')
 
 function loadAuctionSettingsPage(req, res){
-    res.render('auctionSettingsPage')
+    res.render('auctionSettingsPage', {
+        auctionSettings: (new DataBase()).getAuctionSetting()
+    })
 }
 
 function loadPictureListPage(req, res) {

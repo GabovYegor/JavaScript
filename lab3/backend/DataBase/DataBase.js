@@ -1,4 +1,5 @@
 const fs = require('fs');
+const AuctionSettings = require('./auctionSettings')
 
 class DataBase {
     constructor(){
@@ -6,11 +7,13 @@ class DataBase {
             let db = JSON.parse(fs.readFileSync('./DataBase/DataBase.json'))
             this.pictures = db.pictures
             this.users = db.users
+            this.auctionSettings = db.auctionSettings
         }
         catch (e) {
             console.log("Init DataBase")
             this.pictures = []
             this.users = []
+            this.auctionSettings = new AuctionSettings
             this.updateDataBase()
         }
     }
@@ -89,8 +92,19 @@ class DataBase {
         this.updateDataBase()
     }
 
+    setUpAuction(newAuctionSetting){
+        for(let setting in this.auctionSettings)
+            if (setting == Object.keys(newAuctionSetting)[0])
+                this.auctionSettings[setting] = newAuctionSetting[Object.keys(newAuctionSetting)[0]]
+        this.updateDataBase()
+    }
+
+    getAuctionSetting(){
+        return this.auctionSettings
+    }
+
     updateDataBase(){
-        fs.writeFileSync('./DataBase/DataBase.json', JSON.stringify({ pictures: this.pictures, users: this.users }))
+        fs.writeFileSync('./DataBase/DataBase.json', JSON.stringify({ pictures: this.pictures, users: this.users, auctionSettings: this.auctionSettings }))
     }
 }
 
