@@ -1,7 +1,7 @@
+const fs = require('fs');
 const DataBase = require('./DataBase/DataBase')
 const Picture  = require('./DataBase/Picture')
 const User     = require('./DataBase/User')
-const AuctionSettings = require('./DataBase/auctionSettings')
 
 function loadAuctionSettingsPage(req, res){
     res.render('auctionSettingsPage', {
@@ -30,15 +30,18 @@ function loadAddUserPage(req, res) {
 }
 
 function addPictureAction(req, res) {
-    let imagePath = req.body.image
-    if (!imagePath.length) { imagePath = 'default.png' }
-    (new DataBase()).addPictureToDataBase(new Picture('/public/images/' + imagePath, req.body.title, req.body.author, req.body.description, req.body.startPrice))
-    res.redirect('/picturesListPage')
+    if(!fs.existsSync('../public/images/' + req.body.image) || !req.body.image.length)
+        imagePath = '/public/images/default.png'
+    else
+        imagePath = '/public/images/' + req.body.image;
+
+    (new DataBase()).addPictureToDataBase(new Picture(imagePath, req.body.title, req.body.author, req.body.description, req.body.startPrice))
+    res.json({id : (new DataBase().getPicturesMas()[(new DataBase().getPictureNumder()) - 1].ID), imagePath: imagePath})
 }
 
 function addUserAction(req, res) {
     (new DataBase()).addUserToDataBase(new User(req.body.userName, req.body.amountOfMoney))
-    res.redirect('userListPage')
+    res.json((new DataBase().getUsersMas()[(new DataBase().getUserNumder() - 1)].ID))
 }
 
 function removePictureAction(req, res){

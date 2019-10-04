@@ -4,6 +4,7 @@ html
         script(src="https://code.jquery.com/jquery-3.3.1.min.js")
         script(src="public/JQueryCode/userListCode.js")
     body
+        a(href='/') Go to auction settings
         h1 Auction member list
         ol
             each user in users
@@ -21,9 +22,4 @@ html
                     span#isInAction #{user.isInAuction}
                     br
 
-        form(action='/addUserPage' method="GET")
-            input(type='submit' value='Add new user')
-
-        form(action='/removeUserAction' method="POST")
-            input#removeID(name = 'id' type='text' placeholder='ID')
-            input(type='submit' value='Remove User')
+        button#addUserBtn show add user form

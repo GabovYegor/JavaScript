@@ -4,23 +4,21 @@ html
         script(src="https://code.jquery.com/jquery-3.3.1.min.js")
         script(src="public/JQueryCode/auctionSettingsCode.js")
     body
-        h1 Auction Settings
         a(href='/picturesListPage') Go to picture list
+        br
         a(href='/userListPage') Go to user list
 
+        h1 Auction Settings
         div
-            span#dataStart Data start: #{auctionSettings.dataStart}
-
-            br
-            span#timeStart Time Start: #{auctionSettings.timeStart}
-
-            br
-            span#timeAfterBet Time after bet: #{auctionSettings.timeAfterBet}
-
-            br
-            span#timeToExplore Time to explode: #{auctionSettings.timeToExplore}
-
-            br
-            span#timeToNextPicture Time to next picture: #{auctionSettings.timeToNextPicture}
+            b Data start
+            span#dataStart #{auctionSettings.dataStart}
+            b Time start
+            span#timeStart #{auctionSettings.timeStart}
+            b Time after bet
+            span#timeAfterBet #{auctionSettings.timeAfterBet}
+            b Time to explore
+            span#timeToExplore #{auctionSettings.timeToExplore}
+            b Time to next picture
+            span#timeToNextPicture #{auctionSettings.timeToNextPicture}
 
 

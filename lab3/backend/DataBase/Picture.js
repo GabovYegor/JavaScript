@@ -10,10 +10,10 @@ class Picture{
     constructor(imagePath = '/public/images/default.png', title = "defaultTitle", author = "defaultAuthor", description = "defaultDescription",
                 startPrice = 0, isInAuction = false, ID = getPictureID()){
         this.imagePath = imagePath
-        if(!fs.existsSync('..' + imagePath)) {
-            console.log('unable to find file', imagePath)
-            this.imagePath = '/public/images/default.png'
-        }
+        // if(!fs.existsSync('..' + imagePath)) {
+        //     console.log('unable to find file', imagePath)
+        //     this.imagePath = '/public/images/default.png'
+        // }
 
         this.title = title
         this.author = author

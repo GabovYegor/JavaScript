@@ -1,34 +1,42 @@
 html
     head
-        link(href='/public/styles/addPictureStyle.css', rel='stylesheet' )
+        link(href='/public/styles/pictureCardStyle.css', rel='stylesheet' )
     body
+        a(href='/picturesListPage') Go to picture list
+        br
         img(src=picture.imagePath)
         form(action='/changePictureAction' method='post')
             label Picture ID:
             input(name='ID' type='text' placeholder='Picture title' value= picture.ID readonly=true)
             br
+            br
 
             label Picture title:
             input(name='title' type='text' placeholder='Picture title' value= picture.title)
+            br
             br
 
             label Picture author:
             input(name='author' type='text' placeholder='Picture author' value= picture.author)
             br
+            br
 
             label Picture image:
             input(name='imagePath' type='text' placeholder='Picture image' value= picture.imagePath)
+            br
             br
 
             label Picture description:
             textarea(name='description' placeholder='Picture description') #{picture.description}
             br
+            br
 
             label Picture start price:
             input(name='startPrice' type='text' placeholder='Picture start price' value= picture.startPrice)
             br
+            br
 
-            input(type='submit' value='change picture')
-
+            input#button1(type='submit' value='change picture')
+            br
         form(action='/pictureActionAuction/' + picture.ID method='GET')
-            input(type='submit' value='add/remove Picture to/from auction')
+            input#button2(type='submit' value='add/remove Picture to/from auction')
