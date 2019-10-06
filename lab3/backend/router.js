@@ -1,0 +1,21 @@
+const express = require('express')
+const router = express.Router()
+const middleware = require('./middleware')
+
+router.get('/', middleware.loadAuctionSettingsPage)
+router.get('/picturesListPage', middleware.loadPictureListPage)
+router.get('/userListPage', middleware.loadUserListPage)
+router.get('/addPicturePage', middleware.loadAddPicturePage)
+router.get('/addUserPage', middleware.loadAddUserPage)
+router.post('/addPictureAction', middleware.addPictureAction)
+router.post('/addUserAction', middleware.addUserAction)
+router.post('/removePictureAction', middleware.removePictureAction)
+router.post('/removeUserAction', middleware.removeUserAction)
+router.get('/loadPictureCard/:id', middleware.loadPictureCard)
+router.post('/changePictureAction', middleware.changePictureAction)
+router.post('/changeUserAction', middleware.changeUserAction)
+router.get('/pictureActionAuction/:id', middleware.pictureActionAuction)
+router.get('/userActionAuction/:id', middleware.userActionAuction)
+router.post('/setUpAuction', middleware.setUpAuction)
+
+module.exports = router

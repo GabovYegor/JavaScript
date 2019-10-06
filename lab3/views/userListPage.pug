@@ -1,0 +1,25 @@
+html
+    head
+        link(href='/public/stylesProduction/userListStyle.css' rel='stylesheet')
+        script(src="https://code.jquery.com/jquery-3.3.1.min.js")
+        script(src="public/JQueryCodeProduction/userListCode.js")
+    body
+        a(href='/') Go to auction settings
+        h1 Auction member list
+        ol
+            each user in users
+                li
+                    | ID:
+                    span#ID #{user.ID}
+                    br
+                    | Name:
+                    span#userName #{user.userName}
+                    br
+                    | amount of money:
+                    span#amountOfMoney #{user.amountOfMoney}
+                    br
+                    | Take part in auction?&nbsp
+                    span#isInAction #{user.isInAuction}
+                    br
+
+        button#addUserBtn show add user form

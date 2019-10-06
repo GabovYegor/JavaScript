@@ -1,0 +1,29 @@
+html
+    head
+        meta(charset='utf-8')
+        title JQuery
+        script(src="https://code.jquery.com/jquery-3.3.1.min.js")
+        script(src="public/JQueryCodeProduction/pictureListCode.js")
+        link(href='/public/stylesProduction/pictureListStyle.css' rel='stylesheet')
+    body
+        a(href='/') Go to auction settings
+        ol
+            each picture in pictures
+                li
+                    img#image(src=picture.imagePath)
+                    | ID: #{picture.ID}
+                    br
+                    | Author: #{picture.author}
+                    br
+                    | Title: #{picture.title}
+                    br
+                    a(href='/loadPictureCard/' + picture.ID) Go to picture card
+                    - for(let i = 0; i < 2; ++i)
+                        br
+
+        button#addPictureBtn show add picture form
+
+        form(action='/removePictureAction' method="POST")
+            input#removeID(name = 'id' type='text' placeholder='ID')
+            input(type='submit' value='Remove Picture')
+

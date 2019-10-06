@@ -1,0 +1,24 @@
+html
+    head
+        link(href='/public/stylesProduction/auctionSettingsStyle.css', rel='stylesheet' )
+        script(src="https://code.jquery.com/jquery-3.3.1.min.js")
+        script(src="public/JQueryCodeProduction/auctionSettingsCode.js")
+    body
+        a(href='/picturesListPage') Go to picture list
+        br
+        a(href='/userListPage') Go to user list
+
+        h1 Auction Settings
+        div
+            b Data start
+            span#dataStart #{auctionSettings.dataStart}
+            b Time start
+            span#timeStart #{auctionSettings.timeStart}
+            b Time after bet
+            span#timeAfterBet #{auctionSettings.timeAfterBet}
+            b Time to explore
+            span#timeToExplore #{auctionSettings.timeToExplore}
+            b Time to next picture
+            span#timeToNextPicture #{auctionSettings.timeToNextPicture}
+
+

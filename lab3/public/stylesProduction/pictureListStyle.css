@@ -1,0 +1,33 @@
+body {
+  background-color: #bebe64;
+}
+a:link {
+  color: green;
+  background-color: transparent;
+  text-decoration: none;
+}
+a:visited {
+  color: #0000fa;
+  background-color: transparent;
+  text-decoration: none;
+}
+a:hover {
+  color: red;
+  background-color: transparent;
+  text-decoration: underline;
+}
+a:active {
+  color: yellow;
+  background-color: transparent;
+  text-decoration: underline;
+}
+img {
+  position: absolute;
+  left: 20%;
+  width: 80px;
+  height: 80px;
+  border-radius: 10%;
+}
+#removeID {
+  width: 100px;
+}
