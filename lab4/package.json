@@ -2,7 +2,7 @@
   "name": "lab4",
   "version": "1.0.0",
   "description": "web lab 4",
-  "main": "index.js",
+  "main": "socketio.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,6 +10,16 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.15.2",
+    "gulp-flow-remove-types": "^1.0.0",
+    "rollbar": "^2.13.0",
     "socket.io": "^2.3.0"
+  },
+  "devDependencies": {
+    "flow-bin": "^0.109.0",
+    "flow-remove-types": "^2.109.0",
+    "gulp-notify": "^3.2.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-watch": "^5.0.1",
+    "mocha": "^6.2.1"
   }
 }
