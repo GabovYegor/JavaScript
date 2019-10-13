@@ -1,0 +1,76 @@
+@import "commomStyle";
+
+@msgWidth: 40%;
+@btnSendWidth: 50%;
+@inputSendWidth: 100%;
+@msgPadding: 3px;
+@marginBetweenElements: 6px;
+@msgBorderRadius: 0%;
+@msgBorderMargin: 2%;
+@msgTopMargin: 1%;
+@chatSize: {
+    width: 30%;
+    height: 20%;
+}
+@chatPosition: {
+    top: 0%;
+    left: 0%;
+}
+
+#sendBtn{
+  width: @btnSendWidth;
+  background-color: #4CAF50;
+  margin-top: @marginBetweenElements;
+}
+
+#upPriceBtn{
+  width: @btnSendWidth;
+  background-color: #9c27b0;
+  margin-top: @marginBetweenElements;
+}
+
+#sendInput{
+  width: @inputSendWidth;
+  background-color: #ddffff;
+  margin-top: @marginBetweenElements;
+}
+
+#addedMessage {
+  width: @msgWidth;
+  padding: @msgPadding;
+  background-color: greenyellow;
+  border-radius: @msgBorderRadius;
+  margin-left: @msgBorderMargin;
+  margin-top: @msgTopMargin;
+}
+
+#receivedMessage {
+  width: @msgWidth;
+  margin-left: 60% - @msgBorderMargin;
+  margin-top: @msgTopMargin;
+  padding: @msgPadding;
+  border-radius: @msgBorderRadius;
+  background-color: aqua;
+}
+
+#msgField{
+  overflow: auto;
+  height: 100%;
+  width: 100%;
+}
+
+#msgApp{
+  height: @chatSize[height];
+  width: @chatSize[width];
+  margin-top: @chatPosition[top];
+  margin-left: @chatPosition[left];
+  background-color: #ddffff;
+}
+
+#auctionWelcome{
+  margin-left: 30%;
+}
+
+#auctionWelcome, #userName{
+  font-size: 300%;
+}

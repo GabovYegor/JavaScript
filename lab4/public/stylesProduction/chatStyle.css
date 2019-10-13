@@ -1,0 +1,53 @@
+body {
+  background-color: #d2bebe;
+}
+#sendBtn {
+  width: 50%;
+  background-color: #4CAF50;
+  margin-top: 6px;
+}
+#upPriceBtn {
+  width: 50%;
+  background-color: #9c27b0;
+  margin-top: 6px;
+}
+#sendInput {
+  width: 100%;
+  background-color: #ddffff;
+  margin-top: 6px;
+}
+#addedMessage {
+  width: 40%;
+  padding: 3px;
+  background-color: greenyellow;
+  border-radius: 0%;
+  margin-left: 2%;
+  margin-top: 1%;
+}
+#receivedMessage {
+  width: 40%;
+  margin-left: 58%;
+  margin-top: 1%;
+  padding: 3px;
+  border-radius: 0%;
+  background-color: aqua;
+}
+#msgField {
+  overflow: auto;
+  height: 100%;
+  width: 100%;
+}
+#msgApp {
+  height: 20%;
+  width: 30%;
+  margin-top: 0%;
+  margin-left: 0%;
+  background-color: #ddffff;
+}
+#auctionWelcome {
+  margin-left: 30%;
+}
+#auctionWelcome,
+#userName {
+  font-size: 300%;
+}
