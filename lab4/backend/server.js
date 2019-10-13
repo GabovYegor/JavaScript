@@ -12,9 +12,9 @@ app.use('/', require('./router'))
 
 io.on('connection', function (socket) {
     console.log('connection', socket.id)
-    socket.emit('news', { hello: 'world' });
-    socket.on('kek', function (msg) {
-        console.log('invert mes: ', msg)
+    socket.broadcast.emit('user connected', 'user with id: ' + socket.id + ' connected')
+    socket.on('message', function (msg) {
+        socket.broadcast.emit('message', msg)
     })
 });
 

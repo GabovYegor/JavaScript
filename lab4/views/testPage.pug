@@ -2,17 +2,10 @@ html
     head
         script(src="/socket.io/socket.io.js")
         script(src="https://code.jquery.com/jquery-1.11.1.js")
-        script.
-            $(function () {
-                var socket = io()
-                socket.on('news', function (msg) {
-                    console.log('message:', msg)
-                });
-
-                $('#send').click(function () {
-                    console.log('button clicked')
-                    socket.emit('kek', 'kekes egor')
-                })
-            })
-    body
-        button#send send
+        link(rel='stylesheet', href='https://www.w3schools.com/w3css/4/w3.css')
+        link(href='/public/styles/test.less', rel='stylesheet' )
+        script(src='public/clientJS/testJS.js')
+body
+        div#mainDiv
+        input#sendInput.w3-input.w3-light-blue(placeholder='input message here')
+        button#sendButton.w3-btn.w3-blue send message
