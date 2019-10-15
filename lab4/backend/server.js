@@ -16,8 +16,10 @@ server.listen(port, ()=> { console.log('Server worked in', port, 'port!!!') })
 timeToWatchPicture = 5
 timeToBargain = 10
 timeToOtherUsers = 0
-
 isFirstHere = false
+maxBet = 0
+maxBetUserName = ''
+
 io.on('connection', function (socket) {
     console.log('user with ', socket.id, 'connected')
     let db = new DataBase(false)
@@ -46,6 +48,16 @@ io.on('connection', function (socket) {
         }
     })
 
+    socket.on('makeBet', function (userId, bet) {
+        console.log(db.getUserBySocketId(userId).userName + ': ' + bet)
+        socket.emit('message', db.getUserBySocketId(userId).userName + ' make bet: ' + bet)
+        if(maxBet < bet) {
+            maxBet = bet
+            maxBetUserName = db.getUserBySocketId(userId).userName
+        }
+
+    })
+
     var pictureIntervalDescriptor = 0
     if(!isFirstHere) {
         emitAboutStart()
@@ -62,18 +74,25 @@ io.on('connection', function (socket) {
         pictureIntervalDescriptor = setInterval(sendPicturesToUsers, (timeToWatchPicture + timeToBargain) * 1000, pictures)
     }
 
-    let pictireIter = 0
+    let pictureIter = 0
     function sendPicturesToUsers(pictures) {
-        if(pictireIter == pictures.length) {
+        if(pictureIter == pictures.length) {
+            resultOfCurrentBargain(pictures[pictureIter - 1])
             clearInterval(pictureIntervalDescriptor)
             socket.emit('bargain end', 'bargain end')
             socket.broadcast.emit('bargain end', 'bargain end')
             console.log('Picture end')
         }
         else{
-            socket.emit('time to watch', pictures[pictireIter], 'time to watch picture', timeToWatchPicture)
-            socket.broadcast.emit('time to watch', pictures[pictireIter], 'time to watch picture', timeToWatchPicture)
-            setTimeout(startBargain, timeToWatchPicture * 1000, pictures[pictireIter++])
+            try {
+                resultOfCurrentBargain(pictures[pictureIter - 1])
+            }
+            catch (e) {
+                console.log('planning index error')
+            }
+            socket.emit('time to watch', pictures[pictureIter], 'time to watch picture', timeToWatchPicture)
+            socket.broadcast.emit('time to watch', pictures[pictureIter], 'time to watch picture', timeToWatchPicture)
+            setTimeout(startBargain, timeToWatchPicture * 1000, pictures[pictureIter++])
         }
     }
 
@@ -81,5 +100,23 @@ io.on('connection', function (socket) {
         socket.emit('startBargain', picture, 'bargain starts', timeToBargain)
         socket.broadcast.emit('startBargain', picture, 'bargain starts', timeToBargain)
     }
-});
 
+    function resultOfCurrentBargain(picture) {
+        console.log('Winner is: ' + maxBetUserName + ' with bet : ' + maxBet)
+        if(maxBet == 0){
+            socket.emit('message', picture.title + ' isnt sold')
+            socket.broadcast.emit('resultOfCurrentBargain', picture.title + ' isnt sold')
+        }
+        else{
+            socket.emit('message', maxBetUserName + ' bought a ' +  picture.title + ' for ' + maxBet)
+            socket.broadcast.emit('message', maxBetUserName + ' bought a ' +  picture.title + ' for ' + maxBet)
+
+            // TODO
+            //db.updateUserPictures(picture)
+            //db.updatePictureHolder(maxBetUserName)
+            //socket.emit('update money')
+        }
+        maxBet = 0
+        maxBetUserName = ''
+    }
+});

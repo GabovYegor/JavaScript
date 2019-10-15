@@ -29,12 +29,16 @@ $(function () {
         addTextToClient(msg, 'receivedMessage')
     })
 
+    // TODO
+    // socket.on('info', function (msg) {
+    //     addTextToClient(msg, 'infoMessage')
+    // })
+
     socket.on('startTime', function (timeToAuction) {
         startTimer('Auction start across: ', 'Auction Start !!!', timeToAuction - 1)
     })
 
     socket.on('time to watch', function (picture, msg, timeToWatchPicture) {
-        currentPicture = picture
         startTimer('Bargain start across: ', 'Bargain Start !!!', timeToWatchPicture - 1)
         $('#slider').remove()
         $('#contentSlider').remove()
@@ -53,6 +57,7 @@ $(function () {
     })
 
     socket.on('startBargain', function (picture, msg, timeToBargain) {
+        currentPicture = picture
         startTimer('auction will last another: ', 'End current bargain !!!', timeToBargain - 1)
         addTextToClient(msg, 'receivedMessage')
         addTextToClient(picture.title, 'receivedMessage')
@@ -64,7 +69,7 @@ $(function () {
         addTextToClient(msg, 'receivedMessage')
         $('#upPriceBtn').off('click')
         $('#upPriceBtn').click(function () {
-            alert('You can trade only in barger time !!!')
+            alert('You can trade only in bargain time !!!')
         })
     })
 
@@ -101,6 +106,13 @@ $(function () {
 
     function bargainAction() {
         if($(this).hasClass('action')){
+            if(Number(document.getElementById('contentSlider').innerText) > Number(currentPicture.startPrice)) {
+                socket.emit('makeBet', socket.id, document.getElementById('contentSlider').innerText)
+                addTextToClient('Your bet is: ' + document.getElementById('contentSlider').innerText, 'addedMessage')
+            }
+            else{
+                alert('you dont have such money')
+            }
             $('#slider').remove()
             $('#contentSlider').remove()
             $(this).removeClass('action')
@@ -109,8 +121,8 @@ $(function () {
             $(this).addClass('action')
             $(this).after('<div id="slider" style="margin-top: 5px" ></div><span id="contentSlider"></span>')
             $("#slider").slider({
-                value: currentPicture.startPrice,
-                min: 0,
+                value: Number(currentPicture.startPrice) + 100,
+                min: Number(currentPicture.startPrice),
                 max: document.getElementById('userAmountOfMoneyNum').innerText,
                 step: 10,
                 create: function (event, ui) {
