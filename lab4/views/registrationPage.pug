@@ -1,16 +1,12 @@
 html
     head
-        title Picture Auction
-        script(src="https://code.jquery.com/jquery-1.11.1.js")
+        include head
         script(src="public/clientJS/registrationJS.js")
-        link(rel='stylesheet', href='https://www.w3schools.com/w3css/4/w3.css')
-        link(href='/public/stylesProduction/registrationStyle.css', rel='stylesheet' )
     body
-        form(action='/chat', method='POST', style='border:5px solid #ccc')
+        form#userForm(action='/user', method='POST', style='border:5px solid #ccc')
             img#regImg(src='/public/images/registrationImage.png')
             br
-            input#userName.w3-input(name='userName', placeholder='User name')
+            input#regUserName.w3-input(name='userName', placeholder='User name')
             br
             button#regBtn.w3-btn Registration
             div#adminPanel.w3-panel.w3-center Login as admin
-

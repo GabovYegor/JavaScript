@@ -2,6 +2,7 @@ const gulp = require('gulp')
 const flowRemoveTypes = require('gulp-flow-remove-types')
 const del = require("del");
 const less = require('gulp-less');
+var concat = require('gulp-concat-css');
 const watch = require('gulp-watch');
 
 gulp.task('removeFlow', function () {
@@ -28,6 +29,7 @@ gulp.task('style', function () {
     del('public/stylesProduction/')
     return gulp.src('public/styles/*.less')
         .pipe(less())
+        .pipe(concat('style.css'))
         .pipe(gulp.dest('public/stylesProduction/'))
 })
 

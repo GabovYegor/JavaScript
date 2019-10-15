@@ -6,7 +6,8 @@ function userRegistration(req, res) {
         if(user.userName == req.body.userName && !user.isRegistrated) {
             db.registerUser(user)
             res.render('userPage', {
-                userName: user.userName
+                userName: user.userName,
+                userAmountOfMoney: user.amountOfMoney
             })
         }
 
@@ -18,8 +19,21 @@ function userRegistration(req, res) {
 }
 
 function admin(req, res){
-    if(req.body.password == '12345678')
-        res.render('adminPage')
+    if(req.body.password == '12345678') {
+        db = new DataBase(false)
+
+        for(user of db.users){
+            if(user.userName == 'admin' && !user.isRegistrated) {
+                db.registerUser(user)
+                res.render('adminPage', {
+                    users: db.getUsers(),
+                    pictures: db.getPictures()
+                })
+            }
+            if(user.userName == 'admin' && user.isRegistrated)
+                res.end('user already registrated !!!')
+        }
+    }
     else
         res.end('Error!!! Wrong password')
 }

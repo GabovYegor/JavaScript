@@ -13,16 +13,15 @@ class DataBase {
                 for( let picture of dbs.pictures )
                     if (picture.isInAuction)
                         this.pictures.push(new Picture(picture.imagePath, picture.title, picture.author, picture.description, picture.startPrice))
-                console.log('Pictures in auction: ', this.pictures)
-
+                //console.log('Pictures in auction: ', this.pictures)
                 for( let user of dbs.users )
                     if(user.isInAuction)
                         this.users.push(new User(user.userName, user.amountOfMoney))
                 this.users.push(new User('admin'))
-                console.log('Users in auction:', this.users)
+                //console.log('Users in auction:', this.users)
 
                 this.auctionSettings = dbs.auctionSettings
-                console.log('Auction settings: ', this.auctionSettings)
+                //console.log('Auction settings: ', this.auctionSettings)
                 fs.writeFileSync('./DataBase/DataBaseCurrent.json', JSON.stringify({ pictures: this.pictures, users: this.users, auctionSettings: this.auctionSettings }))
                 fs.writeFileSync('../../kek')
             } catch (e) {
@@ -77,6 +76,14 @@ class DataBase {
                 return user
             }
         }
+    }
+
+    getUsers(){
+        return this.users
+    }
+
+    getPictures(){
+        return this.pictures
     }
 
     updateDataBase(){

@@ -1,9 +1,36 @@
 html
     head
-        script(src="/socket.io/socket.io.js")
-        script(src="https://code.jquery.com/jquery-1.11.1.js")
-        link(rel='stylesheet', href='https://www.w3schools.com/w3css/4/w3.css')
-        link(href='/public/stylesProduction/chatStyle.css', rel='stylesheet' )
-        script(src='public/clientJS/adminJS.js')
+        include head
+        script(src='public/clientJS/chatJS.js')
+        style.
+            .olTwoColumn {
+                columns: 2;
+            }
     body
         h1 Admin page
+        ol.olTwoColumn
+            div#adminUserList
+                h1 User List
+                each user in users
+                    div#userInAdminList.w3-panel
+                        | UserName: #{user.userName}
+                        br
+                        | AmountOfMoney: #{user.amountOfMoney}
+
+            div#adminPictureList
+                h1 Picture List
+                each picture in pictures
+                    div#pictureInAdminList.pictureInAdminList.w3-panel
+                        | Title: #{picture.title}
+                        br
+                        | Author: #{picture.author}
+                        if(picture.holder == '')
+                            | Picture isn`t sold
+                            br
+                            | Start price: #{picture.startPrice}
+                        else
+                            | picture sold to #{picture.holder} for #{picture.finishPrice}
+
+        include chatElement
+
+

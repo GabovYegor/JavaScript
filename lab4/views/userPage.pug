@@ -1,11 +1,20 @@
 html
     head
-        script(src="/socket.io/socket.io.js")
-        script(src="https://code.jquery.com/jquery-1.11.1.js")
-        link(rel='stylesheet', href='https://www.w3schools.com/w3css/4/w3.css')
-        link(href='/public/stylesProduction/chatStyle.css', rel='stylesheet' )
+        include head
+        script(src='public/clientJS/userJS.js')
         script(src='public/clientJS/chatJS.js')
     body
         span#auctionWelcome Welcome To auction,&nbsp;
         span#userName #{userName}
+        div#currentTime.w3-panel
+        div#userAmountOfMoneyText.w3-panel User amount of money:
+        div#userAmountOfMoneyNum.w3-panel.w3-center #{userAmountOfMoney}
         include chatElement
+        div#accordionPictureInfo
+            h3#accordionHeader Discover picture:
+            div#pictureInfo
+                img#imagePictureInfo(src='public/images/default.png')
+                div#titlePictureInfo
+                div#authorPictureInfo
+                div#startPricePictureInfo
+                div#descriptionPictureInfo

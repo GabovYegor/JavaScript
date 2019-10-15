@@ -1,0 +1,41 @@
+@listSize: {
+    width: 70%;
+    height: 40%;
+}
+@listTopMargin: 5%;
+@textSize: 200%;
+
+#pictureInAdminList{
+  background-color: yellow;
+  font-size: @textSize;
+}
+
+#adminPictureList{
+  background-color: #4CAF50;
+  width: @listSize[width];
+  overflow: auto;
+  height: @listSize[height];
+}
+
+#userInAdminList{
+  background-color: #004444;
+  font-size: @textSize;
+}
+
+#adminUserList{
+  width: @listSize[width];
+  height: @listSize[height];
+  overflow: auto;
+  background-color: #009688;
+}
+
+#pictureInAdminList > div{
+  border: 5px double #009688;
+  background-color: #9c27b0;
+}
+
+#modalElement{
+  position: absolute;
+  margin-left: 30%;
+  margin-top: 20%;
+}

@@ -1,0 +1,181 @@
+#pictureInAdminList {
+  background-color: yellow;
+  font-size: 200%;
+}
+
+#adminPictureList {
+  background-color: #4CAF50;
+  width: 70%;
+  overflow: auto;
+  height: 40%;
+}
+
+#userInAdminList {
+  background-color: #004444;
+  font-size: 200%;
+}
+
+#adminUserList {
+  width: 70%;
+  height: 40%;
+  overflow: auto;
+  background-color: #009688;
+}
+
+#pictureInAdminList > div {
+  border: 5px double #009688;
+  background-color: #9c27b0;
+}
+
+#modalElement {
+  position: absolute;
+  margin-left: 30%;
+  margin-top: 20%;
+}
+#sendBtn {
+  width: 50%;
+  background-color: #4CAF50;
+  margin-top: 6px;
+}
+
+#upPriceBtn {
+  width: 50%;
+  background-color: #9c27b0;
+  margin-top: 6px;
+}
+
+#sendInput {
+  width: 100%;
+  background-color: #ddffff;
+  margin-top: 6px;
+}
+
+#addedMessage {
+  width: 40%;
+  padding: 3px;
+  background-color: greenyellow;
+  border-radius: 0%;
+  margin-left: 2%;
+  margin-top: 1%;
+}
+
+#receivedMessage {
+  width: 40%;
+  margin-left: 58%;
+  margin-top: 1%;
+  padding: 3px;
+  border-radius: 0%;
+  background-color: aqua;
+}
+
+#msgField {
+  overflow: auto;
+  height: 100%;
+  width: 100%;
+}
+
+#msgApp {
+  height: 20%;
+  width: 30%;
+  margin-top: 0%;
+  margin-left: 0%;
+  background-color: #ddffff;
+}
+body {
+  background-color: #d2bebe;
+}
+#regImg {
+  margin-top: 1%;
+  margin-left: 24%;
+  height: 30%;
+}
+
+#regUserName {
+  margin-top: 4%;
+  width: 80%;
+  margin-left: 10%;
+}
+
+#regBtn {
+  background-color: #4CAF50;
+  width: 100%;
+}
+
+#adminEnterForm {
+  width: 100%;
+  margin: 0%;
+}
+
+#adminPanel {
+  width: 100%;
+  background-color: red;
+  height: 5%;
+  margin-top: -1%;
+  margin-bottom: -1%;
+  padding: 2% 0%;
+}
+
+#adminBtn {
+  width: 50%;
+  background-color: #4CAF50;
+  margin-left: -1%;
+}
+
+#adminPassword {
+  height: 39px;
+  width: 50%;
+  margin-top: 0px;
+  margin-bottom: -1%;
+}
+
+form {
+  background-color: #d2be0e;
+  margin-top: 6%;
+  margin-left: 33%;
+  width: 30%;
+}
+#currentTime {
+  background-color: #d2be0e;
+  font-size: 300%;
+  width: 30%;
+}
+
+#userAmountOfMoneyNum {
+  font-size: 300%;
+  width: 30%;
+  background-color: #4CAF50;
+  margin-top: -1%;
+}
+
+#userAmountOfMoneyText {
+  font-size: 300%;
+  width: 30%;
+  background-color: #4CAF50;
+}
+
+#auctionWelcome {
+  margin-left: 30%;
+}
+
+#auctionWelcome,
+#userName {
+  font-size: 300%;
+}
+
+#accordionPictureInfo {
+  width: 30%;
+  font-size: 200%;
+  margin-left: 40%;
+  margin-top: 0%;
+}
+
+#accordionHeader {
+  padding: 0% 10%;
+  background-color: #d2be0e;
+}
+
+#imagePictureInfo {
+  height: 10%;
+  width: 20%;
+  background-color: #009688;
+}

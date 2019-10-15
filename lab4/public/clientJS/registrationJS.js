@@ -1,4 +1,4 @@
-$(document).ready(()=>{
+$(()=>{
     $(document).on('click', '#adminPanel', function () {
         if($(this).hasClass('adminActive')){
             $('#adminEnterForm').remove()
@@ -12,5 +12,5 @@ $(document).ready(()=>{
                 '  </form> ')
         }
     })
-
 })
+

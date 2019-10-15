@@ -4,6 +4,6 @@ router = express.Router()
 
 router.get('/', (req, res)=> {res.render('registrationPage')})
 router.post('/admin', middware.admin)
-router.post('/chat', middware.userRegistration)
+router.post('/user', middware.userRegistration)
 
 module.exports = router
