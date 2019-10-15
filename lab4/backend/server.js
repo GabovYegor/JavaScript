@@ -111,10 +111,9 @@ io.on('connection', function (socket) {
             socket.emit('message', maxBetUserName + ' bought a ' +  picture.title + ' for ' + maxBet)
             socket.broadcast.emit('message', maxBetUserName + ' bought a ' +  picture.title + ' for ' + maxBet)
 
-            // TODO
-            //db.updateUserPictures(picture)
-            //db.updatePictureHolder(maxBetUserName)
-            //socket.emit('update money')
+            db.updateUserPictures(socket.id, picture, maxBet)
+            db.updatePictureHolder(picture, maxBetUserName)
+            socket.emit('update money', db.getUserBySocketId(socket.id).amountOfMoney)
         }
         maxBet = 0
         maxBetUserName = ''

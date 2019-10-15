@@ -65,6 +65,11 @@ $(function () {
         $('#upPriceBtn').click(bargainAction)
     })
 
+    socket.on('update money', function (newMoneyValue) {
+        console.log('ready to update', newMoneyValue)
+        document.getElementById('userAmountOfMoneyNum').innerText = newMoneyValue
+    })
+
     socket.on('bargain end', function (msg) {
         addTextToClient(msg, 'receivedMessage')
         $('#upPriceBtn').off('click')
@@ -106,12 +111,12 @@ $(function () {
 
     function bargainAction() {
         if($(this).hasClass('action')){
-            if(Number(document.getElementById('contentSlider').innerText) > Number(currentPicture.startPrice)) {
+            if(Number(document.getElementById('contentSlider').innerText) >= Number(currentPicture.startPrice)) {
                 socket.emit('makeBet', socket.id, document.getElementById('contentSlider').innerText)
                 addTextToClient('Your bet is: ' + document.getElementById('contentSlider').innerText, 'addedMessage')
             }
             else{
-                alert('you dont have such money')
+                alert('you dont have such money for buy this picture')
             }
             $('#slider').remove()
             $('#contentSlider').remove()
@@ -120,10 +125,14 @@ $(function () {
         else {
             $(this).addClass('action')
             $(this).after('<div id="slider" style="margin-top: 5px" ></div><span id="contentSlider"></span>')
+            max = Number(document.getElementById('userAmountOfMoneyNum').innerText)
+            min =  Number(currentPicture.startPrice)
+            if(max < Number(currentPicture.startPrice))
+                min = 0
             $("#slider").slider({
-                value: Number(currentPicture.startPrice) + 100,
-                min: Number(currentPicture.startPrice),
-                max: document.getElementById('userAmountOfMoneyNum').innerText,
+                value: min,
+                min: min,
+                max: max,
                 step: 10,
                 create: function (event, ui) {
                     val = $("#slider").slider("value");

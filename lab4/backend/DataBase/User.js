@@ -4,6 +4,7 @@ class User{
         this.amountOfMoney = amountOfMoney
         this.socketID = 0
         this.isRegistrated = false
+        this.pictureMas = []
     }
 }
 

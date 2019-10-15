@@ -86,6 +86,29 @@ class DataBase {
         return this.pictures
     }
 
+    updateUserPictures(userId, picture, finishPrice){
+        user = this.getUserBySocketId(userId)
+        user.pictureMas.push(new Picture(picture.imagePath, picture.title, picture.author, picture.description, picture.startPrice, user.userName, finishPrice))
+        user.amountOfMoney -= finishPrice
+        this.updateDataBase()
+    }
+
+    getPictureByTile(pictureTile){
+        console.log('find picture by name ...')
+        for(let picture of this.pictures){
+            if(picture.title == pictureTile){
+                console.log('picture finded:', picture)
+                return picture
+            }
+        }
+    }
+
+    updatePictureHolder(picture, maxBetUserName){
+        picture = this.getPictureByTile(picture.title)
+        picture.holder =  maxBetUserName
+        this.updateDataBase()
+    }
+
     updateDataBase(){
         fs.writeFileSync('./DataBase/DataBaseCurrent.json', JSON.stringify({ pictures: this.pictures, users: this.users, auctionSettings: this.auctionSettings }))
     }
