@@ -12,7 +12,7 @@ app.set('view engine', 'pug');
 app.set('views', '../views')
 app.use('/', require('./router'))
 init = (new DataBase(true))
-port = 8080
+port = 8081
 server.listen(port, ()=> { console.log('Server worked in', port, 'port!!!') })
 
 timeToWatchPicture = Number(init.auctionSettings.timeToExplore)
