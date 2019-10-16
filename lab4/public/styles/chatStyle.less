@@ -2,13 +2,13 @@
 @btnSendWidth: 50%;
 @inputSendWidth: 100%;
 @msgPadding: 3px;
-@marginBetweenElements: 6px;
+@marginBetweenElements: 10px;
 @msgBorderRadius: 0%;
 @msgBorderMargin: 2%;
 @msgTopMargin: 1%;
 @chatSize: {
-    width: 30%;
-    height: 20%;
+    width: 40%;
+    height: 35%;
 }
 @chatPosition: {
     top: 0%;
@@ -51,9 +51,24 @@
   background-color: aqua;
 }
 
+#infoMessage {
+  width: @msgWidth;
+  margin-left: 30% - @msgBorderMargin;
+  margin-top: @msgTopMargin;
+  padding: @msgPadding;
+  border-radius: @msgBorderRadius;
+  background-color: red;
+}
+
+#currentTime{
+  background-color: #d2be0e;
+  font-size: 200%;
+  width: 100%;
+}
+
 #msgField{
   overflow: auto;
-  height: 100%;
+  height: 50%;
   width: 100%;
 }
 

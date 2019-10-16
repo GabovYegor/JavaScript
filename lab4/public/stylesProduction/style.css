@@ -10,7 +10,7 @@
   height: 40%;
 }
 
-#userInAdminList {
+.userInAdminList {
   background-color: #004444;
   font-size: 200%;
 }
@@ -22,11 +22,6 @@
   background-color: #009688;
 }
 
-#pictureInAdminList > div {
-  border: 5px double #009688;
-  background-color: #9c27b0;
-}
-
 #modalElement {
   position: absolute;
   margin-left: 30%;
@@ -35,19 +30,19 @@
 #sendBtn {
   width: 50%;
   background-color: #4CAF50;
-  margin-top: 6px;
+  margin-top: 10px;
 }
 
 #upPriceBtn {
   width: 50%;
   background-color: #9c27b0;
-  margin-top: 6px;
+  margin-top: 10px;
 }
 
 #sendInput {
   width: 100%;
   background-color: #ddffff;
-  margin-top: 6px;
+  margin-top: 10px;
 }
 
 #addedMessage {
@@ -68,15 +63,30 @@
   background-color: aqua;
 }
 
+#infoMessage {
+  width: 40%;
+  margin-left: 28%;
+  margin-top: 1%;
+  padding: 3px;
+  border-radius: 0%;
+  background-color: red;
+}
+
+#currentTime {
+  background-color: #d2be0e;
+  font-size: 200%;
+  width: 100%;
+}
+
 #msgField {
   overflow: auto;
-  height: 100%;
+  height: 50%;
   width: 100%;
 }
 
 #msgApp {
-  height: 20%;
-  width: 30%;
+  height: 35%;
+  width: 40%;
   margin-top: 0%;
   margin-left: 0%;
   background-color: #ddffff;
@@ -134,12 +144,6 @@ form {
   margin-left: 33%;
   width: 30%;
 }
-#currentTime {
-  background-color: #d2be0e;
-  font-size: 300%;
-  width: 30%;
-}
-
 #userAmountOfMoneyNum {
   font-size: 300%;
   width: 30%;
@@ -169,7 +173,13 @@ form {
   margin-top: 0%;
 }
 
-#accordionHeader {
+#purchasedPictureElement {
+  position: absolute;
+  width: 30%;
+  font-size: 200%;
+}
+
+.accordionHeader {
   padding: 0% 10%;
   background-color: #d2be0e;
 }

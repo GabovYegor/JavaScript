@@ -1,7 +1,7 @@
 html
     head
         include head
-        script(src='public/clientJS/chatJS.js')
+        script(src='public/productionClientJS/chatJS.js')
         style.
             .olTwoColumn {
                 columns: 2;
@@ -12,24 +12,24 @@ html
             div#adminUserList
                 h1 User List
                 each user in users
-                    div#userInAdminList.w3-panel
-                        | UserName: #{user.userName}
-                        br
-                        | AmountOfMoney: #{user.amountOfMoney}
+                    div.userInAdminList.w3-panel
+                        span.userInAdminListInfo UserName: #{user.userName} amountOfMoney: #{user.amountOfMoney}
 
             div#adminPictureList
                 h1 Picture List
                 each picture in pictures
                     div#pictureInAdminList.pictureInAdminList.w3-panel
-                        | Title: #{picture.title}
+                        | Title:
+                        span.pictureTitle #{picture.title}
                         br
-                        | Author: #{picture.author}
+                        | Author:
+                        span.pictureAuthor #{picture.author}
+                        br
+                        | Holder:&nbsp;
                         if(picture.holder == '')
-                            | Picture isn`t sold
-                            br
-                            | Start price: #{picture.startPrice}
+                            span.pictureHolder #{picture.title} isn`t sold price: #{picture.startPrice}
                         else
-                            | picture sold to #{picture.holder} for #{picture.finishPrice}
+                            span.pictureHolder #{picture.title} sold to #{picture.holder} for #{picture.finishPrice}
 
         include chatElement
 

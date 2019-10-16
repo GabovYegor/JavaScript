@@ -3,27 +3,20 @@ const flowRemoveTypes = require('gulp-flow-remove-types')
 const del = require("del");
 const less = require('gulp-less');
 var concat = require('gulp-concat-css');
-const watch = require('gulp-watch');
-
-gulp.task('removeFlow', function () {
-    return del('lib')
-})
 
 gulp.task('flow', function() {
-    return gulp.src('flow.js')
+    return gulp.src('public/clientJS/*.js')
         .pipe(flowRemoveTypes())
-        .pipe(gulp.dest('productionCode'));
+        .pipe(gulp.dest('public/productionClientJS'));
 })
-
-gulp.task('watchJS', function(){
-    gulp.watch('flow.js', gulp.series('default'));
-});
 
 gulp.task('watchStyle', function(){
     gulp.watch('public/styles/*.less', gulp.series('style'));
 });
 
-gulp.task('default', gulp.series('removeFlow', 'flow'))
+gulp.task('watchFlow', function(){
+    gulp.watch('public/clientJS/*.js', gulp.series('flow'));
+});
 
 gulp.task('style', function () {
     del('public/stylesProduction/')
@@ -33,6 +26,5 @@ gulp.task('style', function () {
         .pipe(gulp.dest('public/stylesProduction/'))
 })
 
-// gulp.watch('flow.js', function () {
-//     console.log('seen')
-// })
+gulp.task('watch', gulp.series('watchStyle', 'watchFlow'))
+gulp.task('default', gulp.series('style', 'flow'))

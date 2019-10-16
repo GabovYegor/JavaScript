@@ -1,11 +1,47 @@
-function startTimer(commonMsg, endMsg, time) {
-    var timerDescriptor = setInterval(printTime, 1000)
+// @flow
+
+function startTimer(commonMsg:string, endMsg:string, time:number | string) {
+    var timerDescriptor:number | string = setInterval(printTime, 1000)
     function printTime() {
         if (time == 0) {
             clearInterval(timerDescriptor)
             document.getElementById('currentTime').innerText = endMsg
         } else {
             document.getElementById('currentTime').innerText = commonMsg + time--
+        }
+    }
+}
+
+function updateUserAtAdmin(userName:string, newMoneyValue:number) {
+    let users = $('.userInAdminListInfo')
+    for(let i = 0; i < users.length; ++i) {
+        if(users[i].innerText.indexOf(userName) !=  -1) {
+            users[i].innerText = 'UserName: ' + userName + ' amountOfMoney: ' + newMoneyValue
+        }
+    }
+}
+
+function setUserOnline(userName:string) {
+    let users = $('.userInAdminListInfo')
+    for(let i = 0; i < users.length; ++i) {
+        if(users[i].innerText.indexOf(userName) !=  -1)
+            $(users[i]).parent().css('background-color', 'green')
+    }
+}
+
+function addPictureToUser(picture:any){
+    let newPicture = document.createElement('div')
+    newPicture.innerText = picture.title
+    document.getElementById('purchasedPictureList').appendChild(newPicture)
+}
+
+function updatePictureAtAdmin(holder:string, pictureTitle:string, flag:boolean){
+    let pictures = $('.pictureHolder')
+    for(let i = 0; i < pictures.length; ++i) {
+        if(pictures[i].innerText.indexOf(pictureTitle) != -1) {
+            pictures[i].innerText = holder
+            if(flag)
+                $(pictures[i]).parent().css('background-color', 'gray')
         }
     }
 }
@@ -17,28 +53,28 @@ $(function () {
         addTextToClient('You in chat.', 'addedMessage')
     })
 
-    socket.on('user connected', function (msg) {
+    socket.on('user connected', function (msg:string) {
         addTextToClient(msg + ' connected', 'receivedMessage')
+        setUserOnline(msg)
     });
 
-    socket.on('user disconnected', function (msg) {
+    socket.on('user disconnected', function (msg:string) {
         addTextToClient(msg + ' disconnected', 'receivedMessage')
     });
 
-    socket.on('message', function (msg) {
-        addTextToClient(msg, 'receivedMessage')
+    socket.on('message', function (msg:string) {
+        addTextToClient(msg, 'infoMessage')
     })
 
-    // TODO
-    // socket.on('info', function (msg) {
-    //     addTextToClient(msg, 'infoMessage')
-    // })
+    socket.on('info', function (msg) {
+        addTextToClient(msg, 'infoMessage')
+    })
 
-    socket.on('startTime', function (timeToAuction) {
+    socket.on('startTime', function (timeToAuction:number) {
         startTimer('Auction start across: ', 'Auction Start !!!', timeToAuction - 1)
     })
 
-    socket.on('time to watch', function (picture, msg, timeToWatchPicture) {
+    socket.on('time to watch', function (picture, msg:string, timeToWatchPicture:number) {
         startTimer('Bargain start across: ', 'Bargain Start !!!', timeToWatchPicture - 1)
         $('#slider').remove()
         $('#contentSlider').remove()
@@ -56,7 +92,7 @@ $(function () {
         addTextToClient(picture.title, 'receivedMessage')
     })
 
-    socket.on('startBargain', function (picture, msg, timeToBargain) {
+    socket.on('startBargain', function (picture, msg:string, timeToBargain:number) {
         currentPicture = picture
         startTimer('auction will last another: ', 'End current bargain !!!', timeToBargain - 1)
         addTextToClient(msg, 'receivedMessage')
@@ -65,9 +101,21 @@ $(function () {
         $('#upPriceBtn').click(bargainAction)
     })
 
-    socket.on('update money', function (newMoneyValue) {
-        console.log('ready to update', newMoneyValue)
+    socket.on('resultOfCurrentBargain', function (msg:string) {
+        addTextToClient(msg, 'receivedMessage')
+    })
+
+    socket.on('update money', function (newMoneyValue:number, picture:any) {
         document.getElementById('userAmountOfMoneyNum').innerText = newMoneyValue
+        addPictureToUser(picture)
+    })
+
+    socket.on('updateUserAtAdmin', function (user, newMoneyValue){
+        updateUserAtAdmin(user, newMoneyValue)
+    })
+
+    socket.on('updatePictureHolder', function (holder, pictureTitle, flag) {
+        updatePictureAtAdmin(holder, pictureTitle, flag)
     })
 
     socket.on('bargain end', function (msg) {
@@ -104,6 +152,12 @@ $(function () {
     }
     $('#msgApp').draggable()
     $('#accordionPictureInfo').draggable().accordion({
+        collapsible: true,
+        active: false,
+        heightStyle: "content"
+    })
+
+    $('#purchasedPictureElement').draggable().accordion({
         collapsible: true,
         active: false,
         heightStyle: "content"

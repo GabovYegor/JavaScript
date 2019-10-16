@@ -1,9 +1,11 @@
 const fs = require('fs');
 const User = require('./User')
 const Picture = require('./Picture')
+let Raven = require('raven')
 
+Raven.config('https://94a970f3fb5a476398675801874e7c39@sentry.io/1772410')
 class DataBase {
-    constructor(isInitFromSourceDataBase) {
+    constructor(isInitFromSourceDataBase, src = './DataBase/DataBaseCurrent.json') {
         if (isInitFromSourceDataBase) {
             console.log('InitCurrentDataBase ...')
             this.pictures = []
@@ -26,35 +28,37 @@ class DataBase {
                 fs.writeFileSync('../../kek')
             } catch (e) {
                 console.log('DataBase Source undefined', e)
+                Raven.captureMessage('DataBase Source undefined')
             }
         }
         else{
             try {
-                let db = JSON.parse(fs.readFileSync('./DataBase/DataBaseCurrent.json'))
+                let db = JSON.parse(fs.readFileSync(src))
                 this.pictures = db.pictures
                 this.users = db.users
                 this.auctionSettings = db.auctionSettings
             }
             catch (e) {
                 console.log('DataBaseCurrent undefined')
+                Raven.captureMessage('DataBase current undefined')
             }
         }
     }
 
-    registerUser(userToRegistration){
+    registerUser(userToRegistration, src = './DataBase/DataBaseCurrent.json'){
         for(let user of this.users)
             if(user.userName == userToRegistration.userName)
                 user.isRegistrated = true;
-         this.updateDataBase()
+         this.updateDataBase(src)
     }
 
-    disconnectUser(userToDisconnect){
+    disconnectUser(userToDisconnect, src = './DataBase/DataBaseCurrent.json'){
         for(let user of this.users)
             if(user.userName == userToDisconnect.userName) {
                 user.isRegistrated = false;
                 user.socketID = 0
             }
-        this.updateDataBase()
+        this.updateDataBase(src)
     }
 
     getSocketIdToUser(socketId){
@@ -87,7 +91,9 @@ class DataBase {
     }
 
     updateUserPictures(userId, picture, finishPrice){
+        console.log('update user pictures id: ', userId)
         user = this.getUserBySocketId(userId)
+        console.log('find user to get picture: ', user)
         user.pictureMas.push(new Picture(picture.imagePath, picture.title, picture.author, picture.description, picture.startPrice, user.userName, finishPrice))
         user.amountOfMoney -= finishPrice
         this.updateDataBase()
@@ -103,14 +109,14 @@ class DataBase {
         }
     }
 
-    updatePictureHolder(picture, maxBetUserName){
+    updatePictureHolder(picture, maxBetUserId){
         picture = this.getPictureByTile(picture.title)
-        picture.holder =  maxBetUserName
+        picture.holder =  this.getUserBySocketId(maxBetUserId).userName
         this.updateDataBase()
     }
 
-    updateDataBase(){
-        fs.writeFileSync('./DataBase/DataBaseCurrent.json', JSON.stringify({ pictures: this.pictures, users: this.users, auctionSettings: this.auctionSettings }))
+    updateDataBase(src = './DataBase/DataBaseCurrent.json'){
+        fs.writeFileSync(src, JSON.stringify({ pictures: this.pictures, users: this.users, auctionSettings: this.auctionSettings }))
     }
 }
 

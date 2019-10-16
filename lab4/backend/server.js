@@ -3,33 +3,36 @@ const server = require('http').createServer(app)
 const io = require('socket.io')(server);
 const DataBase = require('./DataBase/DataBase')
 const bodyParser = require('body-parser')
+let Raven = require('raven')
 
+Raven.config('https://94a970f3fb5a476398675801874e7c39@sentry.io/1772410')
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use('/public', require('express').static('../public'));
 app.set('view engine', 'pug');
 app.set('views', '../views')
 app.use('/', require('./router'))
 init = (new DataBase(true))
-port = 8001
+port = 8080
 server.listen(port, ()=> { console.log('Server worked in', port, 'port!!!') })
 
-timeToWatchPicture = 5
-timeToBargain = 10
+timeToWatchPicture = Number(init.auctionSettings.timeToExplore)
+timeToBargain = Number(init.auctionSettings.timeToBargain)
+
 timeToOtherUsers = 0
 isFirstHere = false
-maxBet = 0
-maxBetUserName = ''
+var maxBet = 0
+var maxBetUserId = ''
 
 io.on('connection', function (socket) {
     console.log('user with ', socket.id, 'connected')
     let db = new DataBase(false)
     db.getSocketIdToUser(socket.id)
-
     try {
         socket.broadcast.emit('user connected', db.getUserBySocketId(socket.id).userName)
     }
     catch (e) {
         console.log('user connection error')
+        Raven.captureMessage('user connection error')
     }
 
     socket.on('message', function (msg) {
@@ -45,17 +48,17 @@ io.on('connection', function (socket) {
         }
         catch (e) {
             console.log('disconnect error !!! No such user')
+            Raven.captureMessage('disconect error !!!')
         }
     })
 
     socket.on('makeBet', function (userId, bet) {
-        console.log(db.getUserBySocketId(userId).userName + ': ' + bet)
-        socket.emit('message', db.getUserBySocketId(userId).userName + ' make bet: ' + bet)
-        if(maxBet < bet) {
+        let newDb = new DataBase(false)
+        socket.broadcast.emit('message', newDb.getUserBySocketId(userId).userName + ' make bet: ' + bet)
+        if(Number(maxBet) < Number(bet)) {
             maxBet = bet
-            maxBetUserName = db.getUserBySocketId(userId).userName
+            maxBetUserId = userId
         }
-
     })
 
     var pictureIntervalDescriptor = 0
@@ -85,10 +88,12 @@ io.on('connection', function (socket) {
         }
         else{
             try {
+                console.log('try result of current bargain iter =', pictureIter)
                 resultOfCurrentBargain(pictures[pictureIter - 1])
             }
             catch (e) {
                 console.log('planning index error')
+                Raven.captureMessage('planing error')
             }
             socket.emit('time to watch', pictures[pictureIter], 'time to watch picture', timeToWatchPicture)
             socket.broadcast.emit('time to watch', pictures[pictureIter], 'time to watch picture', timeToWatchPicture)
@@ -102,20 +107,29 @@ io.on('connection', function (socket) {
     }
 
     function resultOfCurrentBargain(picture) {
-        console.log('Winner is: ' + maxBetUserName + ' with bet : ' + maxBet)
+        let newDb = new DataBase(false)
         if(maxBet == 0){
-            socket.emit('message', picture.title + ' isnt sold')
+            socket.emit('resultOfCurrentBargain', picture.title + ' isnt sold')
             socket.broadcast.emit('resultOfCurrentBargain', picture.title + ' isnt sold')
+            socket.emit('updatePictureHolder', 'no one buy this picture', picture.title, false)
+            socket.broadcast.emit('updatePictureHolder', 'no one buy this picture', picture.title, false)
         }
         else{
-            socket.emit('message', maxBetUserName + ' bought a ' +  picture.title + ' for ' + maxBet)
-            socket.broadcast.emit('message', maxBetUserName + ' bought a ' +  picture.title + ' for ' + maxBet)
+            socket.emit('resultOfCurrentBargain', newDb.getUserBySocketId(maxBetUserId).userName + ' bought a ' +  picture.title + ' for ' + maxBet)
+            socket.broadcast.emit('resultOfCurrentBargain', newDb.getUserBySocketId(maxBetUserId).userName + ' bought a ' +  picture.title + ' for ' + maxBet)
+            socket.emit('updatePictureHolder', newDb.getUserBySocketId(maxBetUserId).userName, picture.title, true)
+            socket.broadcast.emit('updatePictureHolder', newDb.getUserBySocketId(maxBetUserId).userName, picture.title, true)
 
-            db.updateUserPictures(socket.id, picture, maxBet)
-            db.updatePictureHolder(picture, maxBetUserName)
-            socket.emit('update money', db.getUserBySocketId(socket.id).amountOfMoney)
+            newDb.updateUserPictures(maxBetUserId, picture, maxBet)
+            newDb.updatePictureHolder(picture, maxBetUserId)
+            money = newDb.getUserBySocketId(maxBetUserId).amountOfMoney
+            console.log('AMOUNT OF MONEY: ', money)
+            io.sockets.sockets[maxBetUserId].emit('update money', money, picture);
+            socket.emit('updateUserAtAdmin', newDb.getUserBySocketId(maxBetUserId).userName, money)
+            socket.broadcast.emit('updateUserAtAdmin', newDb.getUserBySocketId(maxBetUserId).userName, money)
         }
+        console.log('init current bet ...')
         maxBet = 0
-        maxBetUserName = ''
+        maxBetUserId = 0
     }
 });
