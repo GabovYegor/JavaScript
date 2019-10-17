@@ -34,13 +34,17 @@ function addPictureToUser(picture    ){
     document.getElementById('purchasedPictureList').appendChild(newPicture)
 }
 
-function updatePictureAtAdmin(holder       , pictureTitle       , flag        ){
+function updatePictureAtAdmin(holder       , pictureTitle       , finalPrice       , flag        ){
     let pictures = $('.pictureHolder')
     for(let i = 0; i < pictures.length; ++i) {
         if(pictures[i].innerText.indexOf(pictureTitle) != -1) {
-            pictures[i].innerText = holder
-            if(flag)
+            if(flag) {
                 $(pictures[i]).parent().css('background-color', 'gray')
+                pictures[i].innerText = holder + "\n FinalPrice = " + finalPrice
+            }
+            else {
+                pictures[i].innerText = holder
+            }
         }
     }
 }
@@ -62,10 +66,10 @@ $(function () {
     });
 
     socket.on('message', function (msg       ) {
-        addTextToClient(msg, 'infoMessage')
+        addTextToClient(msg, 'receivedMessage')
     })
 
-    socket.on('info', function (msg) {
+    socket.on('info', function (msg       ) {
         addTextToClient(msg, 'infoMessage')
     })
 
@@ -87,21 +91,19 @@ $(function () {
         document.getElementById('titlePictureInfo').innerText = 'Title: ' + picture.title
         document.getElementById('startPricePictureInfo').innerText = 'Start price: ' + picture.startPrice
         document.getElementById('descriptionPictureInfo').innerText = 'Description: ' + picture.description
-        addTextToClient(msg, 'receivedMessage')
-        addTextToClient(picture.title, 'receivedMessage')
+        addTextToClient(msg + ' : ' + picture.title, 'infoMessage')
     })
 
     socket.on('startBargain', function (picture, msg       , timeToBargain       ) {
         currentPicture = picture
         startTimer('auction will last another: ', 'End current bargain !!!', timeToBargain - 1)
-        addTextToClient(msg, 'receivedMessage')
-        addTextToClient(picture.title, 'receivedMessage')
+        addTextToClient(msg + ' : ' + picture.title, 'infoMessage')
         $('#upPriceBtn').off('click')
         $('#upPriceBtn').click(bargainAction)
     })
 
     socket.on('resultOfCurrentBargain', function (msg       ) {
-        addTextToClient(msg, 'receivedMessage')
+        addTextToClient(msg, 'infoMessage')
     })
 
     socket.on('update money', function (newMoneyValue       , picture    ) {
@@ -113,12 +115,12 @@ $(function () {
         updateUserAtAdmin(user, newMoneyValue)
     })
 
-    socket.on('updatePictureHolder', function (holder, pictureTitle, flag) {
-        updatePictureAtAdmin(holder, pictureTitle, flag)
+    socket.on('updatePictureHolder', function (holder, pictureTitle, finalPrice, flag) {
+        updatePictureAtAdmin(holder, pictureTitle, finalPrice, flag)
     })
 
     socket.on('bargain end', function (msg) {
-        addTextToClient(msg, 'receivedMessage')
+        addTextToClient(msg, 'infoMessage')
         $('#upPriceBtn').off('click')
         $('#upPriceBtn').click(function () {
             alert('You can trade only in bargain time !!!')
@@ -150,13 +152,13 @@ $(function () {
         mainDiv.scrollTop = mainDiv.scrollHeight
     }
     $('#msgApp').draggable()
-    $('#accordionPictureInfo').draggable().accordion({
+    $('#accordionPictureInfo').accordion({
         collapsible: true,
         active: false,
         heightStyle: "content"
     })
 
-    $('#purchasedPictureElement').draggable().accordion({
+    $('#purchasedPictureElement').accordion({
         collapsible: true,
         active: false,
         heightStyle: "content"

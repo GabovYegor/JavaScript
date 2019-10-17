@@ -54,11 +54,13 @@ io.on('connection', function (socket) {
 
     socket.on('makeBet', function (userId, bet) {
         let newDb = new DataBase(false)
-        socket.broadcast.emit('message', newDb.getUserBySocketId(userId).userName + ' make bet: ' + bet)
+        socket.broadcast.emit('info', newDb.getUserBySocketId(userId).userName + ' make bet: ' + bet)
         if(Number(maxBet) < Number(bet)) {
             maxBet = bet
             maxBetUserId = userId
         }
+        socket.emit('info', 'current max bet = ' + newDb.getUserBySocketId(maxBetUserId).userName + ": " + maxBet)
+        socket.broadcast.emit('info', 'current max bet = ' + newDb.getUserBySocketId(userId).userName + ": " + maxBet)
     })
 
     var pictureIntervalDescriptor = 0
@@ -111,14 +113,14 @@ io.on('connection', function (socket) {
         if(maxBet == 0){
             socket.emit('resultOfCurrentBargain', picture.title + ' isnt sold')
             socket.broadcast.emit('resultOfCurrentBargain', picture.title + ' isnt sold')
-            socket.emit('updatePictureHolder', 'no one buy this picture', picture.title, false)
-            socket.broadcast.emit('updatePictureHolder', 'no one buy this picture', picture.title, false)
+            socket.emit('updatePictureHolder', 'no one buy this picture', picture.title, 0, false)
+            socket.broadcast.emit('updatePictureHolder', 'no one buy this picture', picture.title, 0, false)
         }
         else{
             socket.emit('resultOfCurrentBargain', newDb.getUserBySocketId(maxBetUserId).userName + ' bought a ' +  picture.title + ' for ' + maxBet)
             socket.broadcast.emit('resultOfCurrentBargain', newDb.getUserBySocketId(maxBetUserId).userName + ' bought a ' +  picture.title + ' for ' + maxBet)
-            socket.emit('updatePictureHolder', newDb.getUserBySocketId(maxBetUserId).userName, picture.title, true)
-            socket.broadcast.emit('updatePictureHolder', newDb.getUserBySocketId(maxBetUserId).userName, picture.title, true)
+            socket.emit('updatePictureHolder', newDb.getUserBySocketId(maxBetUserId).userName, picture.title, maxBet, true)
+            socket.broadcast.emit('updatePictureHolder', newDb.getUserBySocketId(maxBetUserId).userName, picture.title, maxBet, true)
 
             newDb.updateUserPictures(maxBetUserId, picture, maxBet)
             newDb.updatePictureHolder(picture, maxBetUserId)

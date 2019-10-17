@@ -27,70 +27,6 @@
   margin-left: 30%;
   margin-top: 20%;
 }
-#sendBtn {
-  width: 50%;
-  background-color: #4CAF50;
-  margin-top: 10px;
-}
-
-#upPriceBtn {
-  width: 50%;
-  background-color: #9c27b0;
-  margin-top: 10px;
-}
-
-#sendInput {
-  width: 100%;
-  background-color: #ddffff;
-  margin-top: 10px;
-}
-
-#addedMessage {
-  width: 40%;
-  padding: 3px;
-  background-color: greenyellow;
-  border-radius: 0%;
-  margin-left: 2%;
-  margin-top: 1%;
-}
-
-#receivedMessage {
-  width: 40%;
-  margin-left: 58%;
-  margin-top: 1%;
-  padding: 3px;
-  border-radius: 0%;
-  background-color: aqua;
-}
-
-#infoMessage {
-  width: 40%;
-  margin-left: 28%;
-  margin-top: 1%;
-  padding: 3px;
-  border-radius: 0%;
-  background-color: red;
-}
-
-#currentTime {
-  background-color: #d2be0e;
-  font-size: 200%;
-  width: 100%;
-}
-
-#msgField {
-  overflow: auto;
-  height: 50%;
-  width: 100%;
-}
-
-#msgApp {
-  height: 35%;
-  width: 40%;
-  margin-top: 0%;
-  margin-left: 0%;
-  background-color: #ddffff;
-}
 body {
   background-color: #d2bebe;
 }
@@ -144,16 +80,82 @@ form {
   margin-left: 33%;
   width: 30%;
 }
+#sendBtn {
+  width: 50%;
+  background-color: #4CAF50;
+  margin-top: 10px;
+}
+
+#upPriceBtn {
+  width: 50%;
+  background-color: #9c27b0;
+  margin-top: 10px;
+}
+
+#sendInput {
+  width: 100%;
+  background-color: #ddffff;
+  margin-top: 10px;
+}
+
+#addedMessage {
+  width: 40%;
+  padding: 3px;
+  background-color: greenyellow;
+  border-radius: 0%;
+  margin-left: 2%;
+  margin-top: 1%;
+}
+
+#receivedMessage {
+  width: 40%;
+  margin-left: 58%;
+  margin-top: 1%;
+  padding: 3px;
+  border-radius: 0%;
+  background-color: aqua;
+}
+
+#infoMessage {
+  width: 40%;
+  margin-left: 28%;
+  margin-top: 1%;
+  padding: 3px;
+  border-radius: 0%;
+  background-color: red;
+}
+
+#currentTime {
+  background-color: #d2be0e;
+  font-size: 200%;
+  width: 100%;
+}
+
+#msgField {
+  overflow: auto;
+  height: 80%;
+  width: 100%;
+}
+
+#msgApp {
+  height: 35%;
+  width: 40%;
+  margin-top: 15%;
+  margin-left: 55%;
+  background-color: #ddffff;
+}
 #userAmountOfMoneyNum {
   font-size: 300%;
   width: 30%;
   background-color: #4CAF50;
   margin-top: -1%;
+  margin-left: 3%;
 }
 
 #userAmountOfMoneyText {
   font-size: 300%;
   width: 30%;
+  margin-left: 3%;
   background-color: #4CAF50;
 }
 
@@ -169,14 +171,16 @@ form {
 #accordionPictureInfo {
   width: 30%;
   font-size: 200%;
-  margin-left: 40%;
-  margin-top: 0%;
+  margin-left: 3%;
+  margin-top: -20%;
 }
 
 #purchasedPictureElement {
   position: absolute;
   width: 30%;
   font-size: 200%;
+  margin-top: -32%;
+  margin-left: 3%;
 }
 
 .accordionHeader {
