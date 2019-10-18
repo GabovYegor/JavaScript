@@ -1,0 +1,36 @@
+html
+    head
+        include head
+        script(src='public/productionClientJSWebPack/result.js')
+        style.
+            .olTwoColumn {
+                columns: 2;
+            }
+    body
+        h1 Admin page
+        ol.olTwoColumn
+            div#adminUserList
+                h1 User List
+                each user in users
+                    div.userInAdminList.w3-panel
+                        span.userInAdminListInfo UserName: #{user.userName} amountOfMoney: #{user.amountOfMoney}
+
+            div#adminPictureList
+                h1 Picture List
+                each picture in pictures
+                    div#pictureInAdminList.pictureInAdminList.w3-panel
+                        | Title:
+                        span.pictureTitle #{picture.title}
+                        br
+                        | Author:
+                        span.pictureAuthor #{picture.author}
+                        br
+                        | Holder:&nbsp;
+                        if(picture.holder == '')
+                            span.pictureHolder #{picture.title} isn`t sold price: #{picture.startPrice}
+                        else
+                            span.pictureHolder #{picture.title} sold to #{picture.holder} for #{picture.finishPrice}
+
+        include chatElement
+
+

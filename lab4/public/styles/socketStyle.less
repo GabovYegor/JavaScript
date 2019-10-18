@@ -1,0 +1,81 @@
+@msgWidth: 40%;
+@btnSendWidth: 50%;
+@inputSendWidth: 100%;
+@msgPadding: 3px;
+@marginBetweenElements: 10px;
+@msgBorderRadius: 0%;
+@msgBorderMargin: 2%;
+@msgTopMargin: 1%;
+@chatSize: {
+    width: 40%;
+    height: 35%;
+}
+@chatPosition: {
+    top: 15%;
+    left: 55%;
+}
+
+#sendBtn{
+  width: @btnSendWidth;
+  background-color: #4CAF50;
+  margin-top: @marginBetweenElements;
+}
+
+#upPriceBtn{
+  width: @btnSendWidth;
+  background-color: #9c27b0;
+  margin-top: @marginBetweenElements;
+}
+
+#sendInput{
+  width: @inputSendWidth;
+  background-color: #ddffff;
+  margin-top: @marginBetweenElements;
+}
+
+#addedMessage {
+  width: @msgWidth;
+  padding: @msgPadding;
+  background-color: greenyellow;
+  border-radius: @msgBorderRadius;
+  margin-left: @msgBorderMargin;
+  margin-top: @msgTopMargin;
+}
+
+#receivedMessage {
+  width: @msgWidth;
+  margin-left: 60% - @msgBorderMargin;
+  margin-top: @msgTopMargin;
+  padding: @msgPadding;
+  border-radius: @msgBorderRadius;
+  background-color: aqua;
+}
+
+#infoMessage {
+  width: @msgWidth;
+  margin-left: 30% - @msgBorderMargin;
+  margin-top: @msgTopMargin;
+  padding: @msgPadding;
+  border-radius: @msgBorderRadius;
+  background-color: red;
+}
+
+#currentTime{
+  background-color: #d2be0e;
+  font-size: 200%;
+  width: 100%;
+}
+
+#msgField{
+  overflow: auto;
+  height: 80%;
+  width: 100%;
+}
+
+#msgApp{
+  height: @chatSize[height];
+  width: @chatSize[width];
+  margin-top: @chatPosition[top];
+  margin-left: @chatPosition[left];
+  background-color: #ddffff;
+}

@@ -1,0 +1,22 @@
+html
+    head
+        include head
+        script(src='public/productionClientJSWebPack/result.js')
+    body
+        span#auctionWelcome Welcome To auction,&nbsp;
+        span#userName #{userName}
+        div#userAmountOfMoneyText.w3-panel User amount of money:
+        div#userAmountOfMoneyNum.w3-panel.w3-center #{userAmountOfMoney}
+        include chatElement
+        div#purchasedPictureElement
+            h3.accordionHeader Purchased pictures:
+            div#purchasedPictureList
+        div#accordionPictureInfo
+            h3.accordionHeader Discover picture:
+            div#pictureInfo
+                img#imagePictureInfo(src='public/images/default.png')
+                div#titlePictureInfo
+                div#authorPictureInfo
+                div#startPricePictureInfo
+                div#descriptionPictureInfo
+

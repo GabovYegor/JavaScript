@@ -1,0 +1,12 @@
+html
+    head
+        include head
+        script(src="public/clientJS/registrationJS.js")
+    body
+        form#userForm(action='/user', method='POST', style='border:5px solid #ccc')
+            img#regImg(src='/public/images/registrationImage.png')
+            br
+            input#regUserName.w3-input(name='userName', placeholder='User name')
+            br
+            button#regBtn.w3-btn Registration
+            div#adminPanel.w3-panel.w3-center Login as admin
