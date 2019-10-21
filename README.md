@@ -1,2 +1,3 @@
 # JavaScript
-Repo for saving JS code 
+Repo for Web-Labs
+
