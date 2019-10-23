@@ -2,14 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ebb78d10-8729-46c0-93e7-43d9f586cfd1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../DataBase.json" beforeDir="false" afterPath="$PROJECT_DIR$/../DataBase.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab2/DataBase.json" beforeDir="false" afterPath="$PROJECT_DIR$/../lab2/DataBase.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab2/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lab2/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab2/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lab2/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab3/backend/DataBase/DataBase.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lab3/backend/DataBase/DataBase.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab3/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../lab3/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab4/backend/DataBase/DataBaseCurrent.json" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4/backend/DataBase/DataBaseCurrent.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab5-2/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab5-2/.idea/lab5-2.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab5-2/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab5-2/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab5-2/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab5-2/.idea/watcherTasks.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab5-2/stockExchange/backend/DataBase/Broker.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab5-2/stockExchange/backend/DataBase/DataBase.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab5-2/stockExchange/backend/DataBase/DataBase.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab5-2/stockExchange/backend/DataBase/Share.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab5-2/stockExchange/backend/DataBase/StockExchangeSettings.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab5-2/stockExchange/backend/router.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab5-2/stockExchange/backend/server.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -22,8 +27,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
-        <option value="JavaScript File" />
         <option value="TypeScript File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -42,6 +47,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js.last.introduce.type" value="LET" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../exressAngular" />
@@ -87,6 +93,8 @@
       <workItem from="1571677696602" duration="5583000" />
       <workItem from="1571762909689" duration="14421000" />
       <workItem from="1571825512596" duration="1056000" />
+      <workItem from="1571844580533" duration="5044000" />
+      <workItem from="1571851333960" duration="6448000" />
     </task>
     <servers />
   </component>

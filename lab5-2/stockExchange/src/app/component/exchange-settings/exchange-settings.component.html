@@ -1,0 +1,21 @@
+<h1 [ngClass]="{exchangeSettingsTitleStyle: true}"> Stock Exchange !!! </h1>
+
+<div [ngClass]="{exchangeSettingsStyle: true}">
+  <div (click)="showDataStartChangeField()"> DataStart: {{dateStartValue}} </div>
+  <div *ngIf="dateCondition">
+    <input [(ngModel)]="dateStartValue" (ngModelChange)="print()">
+  </div>
+  <div (click)="showTimeStartChangeField()"> TimeStart: {{timeStartValue}} </div>
+  <div *ngIf="timeCondition">
+    <input [(ngModel)]="timeStartValue">
+  </div>
+  <div (click)="showTradingDurationChangeField()"> Trading duration: {{tradingDuration}} </div>
+  <div *ngIf="tradingDurationCondition">
+    <input [(ngModel)]="tradingDuration">
+  </div>
+  <div (click)="showTimeToRecountStoreChangeField()"> Time to recount share price: {{timeToRecountShare}} </div>
+  <div *ngIf="timeToRecountShareCondition">
+    <input [(ngModel)]="timeToRecountShare">
+  </div>
+</div>
+
