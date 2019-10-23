@@ -2,15 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ebb78d10-8729-46c0-93e7-43d9f586cfd1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/my-app/router.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-app/server.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my-app/src/service/http.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-app/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/app.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-app/src/app/app.component.less" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/app.component.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-app/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/app.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-app/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DataBase.json" beforeDir="false" afterPath="$PROJECT_DIR$/../DataBase.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab2/DataBase.json" beforeDir="false" afterPath="$PROJECT_DIR$/../lab2/DataBase.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab2/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lab2/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab2/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lab2/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab3/backend/DataBase/DataBase.js" beforeDir="false" afterPath="$PROJECT_DIR$/../lab3/backend/DataBase/DataBase.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab3/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../lab3/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab4/backend/DataBase/DataBaseCurrent.json" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4/backend/DataBase/DataBaseCurrent.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,7 +28,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/my-app" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="JsFlowSettings">
     <service-enabled>true</service-enabled>
@@ -44,13 +44,15 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js.last.introduce.type" value="LET" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../exressAngular" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Color Scheme Font" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/my-app/node_modules/typescript/lib" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/my-app/src/directive" />
+      <recent name="$PROJECT_DIR$/my-app/src/app/app-component" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/default/helloapp/src/app" />
       <recent name="$PROJECT_DIR$/default" />
@@ -83,6 +85,8 @@
       <workItem from="1571587946064" duration="5154000" />
       <workItem from="1571672973895" duration="1841000" />
       <workItem from="1571677696602" duration="5583000" />
+      <workItem from="1571762909689" duration="14421000" />
+      <workItem from="1571825512596" duration="1056000" />
     </task>
     <servers />
   </component>
@@ -91,6 +95,7 @@
     <option name="exactExcludedFiles">
       <list>
         <option value="$PROJECT_DIR$/default/type.js" />
+        <option value="$PROJECT_DIR$/../../UniversityLabsV/Web/lab5/node_modules/.staging/karma-7e2e67b5/config.tpl.js" />
       </list>
     </option>
   </component>

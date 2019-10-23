@@ -4,7 +4,7 @@ const AuctionSettings = require('./auctionSettings')
 class DataBase {
     constructor(){
         try {
-            let db = JSON.parse(fs.readFileSync('./DataBase/DataBase.json'))
+            let db = JSON.parse(fs.readFileSync('../../DataBase.json'))
             this.pictures = db.pictures
             this.users = db.users
             this.auctionSettings = db.auctionSettings
@@ -104,7 +104,7 @@ class DataBase {
     }
 
     updateDataBase(){
-        fs.writeFileSync('./DataBase/DataBase.json', JSON.stringify({ pictures: this.pictures, users: this.users, auctionSettings: this.auctionSettings }))
+        fs.writeFileSync('../../DataBase.json', JSON.stringify({ pictures: this.pictures, users: this.users, auctionSettings: this.auctionSettings }))
     }
 }
 

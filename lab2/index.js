@@ -15,7 +15,7 @@ app.set('view engine', 'pug');
 app.set('views', './views')
 require('./authentification').initPassport()
 app.use('/', require('./user'))
-fileWork.initDataBase()
+db = fileWork.initDataBase()
 const port = process.env.PORT || 8080
 
 app.listen(port, function (err) {
