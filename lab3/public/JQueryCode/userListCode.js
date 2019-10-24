@@ -31,6 +31,7 @@ $(document).ready(() => {
         $.get("/userActionAuction/" + $(this).closest('li').find('#ID').text(), {}, userActionAuction($(this).closest('li').find('#isInAction')), "json")
     })
 
+
     $(document).on('click', '#addUserBtn', function () {
         if($(this).hasClass('addActive')){
             $(this).text('show add user form')

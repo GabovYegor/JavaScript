@@ -7,19 +7,28 @@ import { HttpService } from "../../../service/http.service";
   styleUrls: ['./exchange-settings.component.less'],
   providers: [HttpService]
 })
-
 export class ExchangeSettingsComponent implements OnInit {
   constructor(private httpService: HttpService){}
 
+  tempData:any
   ngOnInit() {
-    this.httpService.initExchangeSettings().subscribe(this.initExchangeSettings)
   }
 
-  initExchangeSettings(data){
-    this.dateStartValue = data.dateStart
-    this.timeStartValue = data.timeStart
-    this.tradingDuration = data.tradingDuration
-    this.timeToRecountShare = data.timeToRecountShare
+  dateStartValue:string
+  timeStartValue:string
+  tradingDuration:string
+  timeToRecountShare:string
+
+  initExchangeSettings(){
+    this.httpService.initExchangeSettings().subscribe((data) => this.tempData = {data})
+    try {
+      this.dateStartValue = this.tempData.data.dateStart
+      this.timeStartValue = this.tempData.data.timeStart
+      this.tradingDuration = this.tempData.data.tradingDuration
+      this.timeToRecountShare = this.tempData.data.timeToRecountShare
+    }
+    catch (e) {
+    }
   }
 
   dateCondition:boolean = false
@@ -27,13 +36,10 @@ export class ExchangeSettingsComponent implements OnInit {
   tradingDurationCondition:boolean = false
   timeToRecountShareCondition:boolean = false
 
-  dateStartValue:string = '01.01.2020'
-  timeStartValue:string = '10:00'
-  tradingDuration:string = '100'
-  timeToRecountShare:string = '200'
-
-  print(){
-    console.log('kekes')
+  sendExchangeSettings(){
+    this.httpService.sendExchangeSettings(
+      { dateStart: this.dateStartValue , timeStart: this.timeStartValue,
+              tradingDuration: this.tradingDuration, timeToRecountShare: this.timeToRecountShare}).subscribe()
   }
 
   showDataStartChangeField(){ this.dateCondition = !this.dateCondition }
