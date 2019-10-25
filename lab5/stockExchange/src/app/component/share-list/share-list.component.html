@@ -1,0 +1,39 @@
+<h1 [ngClass]="{shareTitleStyle: true}"> Share List </h1>
+<button (click)="getShareMas()">show/hide share mas</button>
+<div [ngClass]="{brokerAddStyle: true}">
+  <div (click)="showAddBrokerField()"> Add new Share </div>
+  <div *ngIf="addShareCondition">
+    <label> Title: </label>
+    <input [(ngModel)]="addedShareTitle">
+    <br>
+    <label> Price: </label>
+    <input [(ngModel)]="addedSharePrice">
+    <br>
+    <label> Max change value: </label>
+    <input [(ngModel)]="addedShareMaxChangeValue">
+    <br>
+    <label> Distribution: </label>
+    <input [(ngModel)]="addedShareDistribution">
+    <br>
+    <label> Number of share: </label>
+    <input [(ngModel)]="addedShareNumberOfShare">
+    <br>
+    <button (click)="addShare()">Add share</button>
+  </div>
+</div>
+
+<div *ngIf="showShareMas">
+  <button (click)="deleteShareById()">Delete</button>
+  <input placeholder="broker ID" [(ngModel)]="shareIDToDelete">
+  <br>
+
+  <ul>
+    <li *ngFor="let share of shareMas">
+      <p> title: {{share.shareTitle}}</p>
+      <p> price: {{share.sharePrice}}</p>
+      <p> max change value: {{share.maxChangeValue}}</p>
+      <p> distribution: {{share.distribution}}</p>
+      <p> number of share: {{share.numberOfShare}}</p>
+    </li>
+  </ul>
+</div>
