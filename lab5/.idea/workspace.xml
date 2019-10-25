@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="34865133-48c6-4f0d-b159-a1411d2b4fc0" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/stockExchange/backend/DataBase/DataBase.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stockExchange/src/app/component/share-list/share-list.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/stockExchange/src/app/component/share-list/share-list.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stockExchange/src/app/component/share-list/share-list.component.less" beforeDir="false" afterPath="$PROJECT_DIR$/stockExchange/src/app/component/share-list/share-list.component.less" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="tsconfig.json" />
+        <option value="JavaScript File" />
+        <option value="TypeScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1Sc0WtqBKsyDQ9QHST1o3xbJeNP" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/stockExchange/node_modules/typescript/lib" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/stockExchange/src" />
+      <recent name="$PROJECT_DIR$/stockExchange/backend" />
+      <recent name="$PROJECT_DIR$/stockExchange/src/app" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="34865133-48c6-4f0d-b159-a1411d2b4fc0" name="Default Changelist" comment="" />
+      <created>1571847611848</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1571847611848</updated>
+      <workItem from="1571847613099" duration="3183000" />
+      <workItem from="1571851335783" duration="10658000" />
+      <workItem from="1571913615170" duration="4221000" />
+      <workItem from="1571927710820" duration="5618000" />
+      <workItem from="1571933375198" duration="16959000" />
+      <workItem from="1571979663175" duration="1626000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

@@ -19,4 +19,9 @@ $(document).ready(() => {
   function updateSettings(elem, newValue) {
     elem.text(newValue);
   }
+
+  $('#kek').text('mama')
+  $('#kek').click(function () {
+    $('#kek').after('<h1>papa</h1>')
+  })
 });

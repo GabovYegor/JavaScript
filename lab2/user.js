@@ -66,7 +66,7 @@ function renderProfile (req, res) {
     db.updateUser(user)
     res.render('userProfile', {
         user: user,
-        bookCount: 400 //user.books.length
+        bookCount: user.books.length
     })
 }
 
