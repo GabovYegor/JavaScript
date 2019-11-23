@@ -1,0 +1,40 @@
+.form__{
+    width:240px;
+    position:relative;
+    left:50%;
+    margin-left:-120px;
+    background: #d8d21b;
+    border-radius: 10px;
+    margin-top:10%;
+    height:230px;
+
+}
+
+.header4{
+    color: #5b2447;
+}
+button{
+    width:230px;
+    background: #04ba00;
+    color: aliceblue;
+}
+.text{
+    font-size: 14px;
+    color: #625c14;
+    background: #d8d21b;
+}
+.my-input {
+    font-size: 13px;
+    padding: 10px;
+    display: block;
+    width: 200px;
+    border: none;
+    margin-left:20px;
+    border-bottom: 1px solid #ccc;
+}
+h1{
+    border-radius: 10px;
+    background: #ba89b6;
+    text-align: center;
+    margin-top:-10px
+}

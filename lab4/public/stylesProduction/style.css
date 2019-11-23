@@ -1,25 +1,13 @@
-#pictureInAdminList {
-  background-color: yellow;
-  font-size: 200%;
-}
-
 #adminPictureList {
-  background-color: #4CAF50;
   width: 70%;
   overflow: auto;
   height: 40%;
-}
-
-.userInAdminList {
-  background-color: #004444;
-  font-size: 200%;
 }
 
 #adminUserList {
   width: 70%;
   height: 40%;
   overflow: auto;
-  background-color: #009688;
 }
 
 #modalElement {
@@ -28,67 +16,71 @@
   margin-top: 20%;
 }
 body {
-  background-color: #d2bebe;
+  font-family: "Times New Roman", Times, sans-serif;
+  background-color: #ccc;
 }
-#regImg {
-  margin-top: 1%;
-  margin-left: 24%;
+body {
+  text-align: center;
+}
+
+img {
   height: 30%;
 }
 
-#regUserName {
-  margin-top: 4%;
-  width: 80%;
-  margin-left: 10%;
-}
-
-#regBtn {
-  background-color: #4CAF50;
-  width: 100%;
-}
-
-#adminEnterForm {
-  width: 100%;
-  margin: 0%;
-}
-
-#adminPanel {
-  width: 100%;
-  background-color: red;
-  height: 5%;
-  margin-top: -1%;
-  margin-bottom: -1%;
-  padding: 2% 0%;
-}
-
-#adminBtn {
-  width: 50%;
-  background-color: #4CAF50;
-  margin-left: -1%;
-}
-
-#adminPassword {
-  height: 39px;
-  width: 50%;
-  margin-top: 0px;
-  margin-bottom: -1%;
-}
-
 form {
-  background-color: #d2be0e;
-  margin-top: 6%;
-  margin-left: 33%;
-  width: 30%;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+input[type=text],
+select,
+input[type=password] {
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+button[type=submit],
+input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover,
+button[type=submit]:hover {
+  background-color: #45a049;
+}
+
+div {
+  background-color: #f2f2f2;
+  padding: 20px;
+  border: 2px #4CAF50 solid;
+  border-radius: 5px;
 }
 #sendBtn {
   width: 50%;
-  background-color: #4CAF50;
+  background-color: white;
+  border: 2px #4CAF50 solid;
+  border-radius: 5px;
   margin-top: 10px;
 }
 
 #upPriceBtn {
   width: 50%;
-  background-color: #9c27b0;
+  background-color: white;
+  border: 2px #4CAF50 solid;
+  border-radius: 5px;
   margin-top: 10px;
 }
 
@@ -101,8 +93,9 @@ form {
 #addedMessage {
   width: 40%;
   padding: 3px;
-  background-color: greenyellow;
-  border-radius: 0%;
+  background-color: #44afee;
+  border-radius: 5px;
+  border-width: 0px;
   margin-left: 2%;
   margin-top: 1%;
 }
@@ -112,8 +105,9 @@ form {
   margin-left: 58%;
   margin-top: 1%;
   padding: 3px;
-  border-radius: 0%;
-  background-color: aqua;
+  border-radius: 5px;
+  border-width: 0px;
+  background-color: #00d683;
 }
 
 #infoMessage {
@@ -121,12 +115,13 @@ form {
   margin-left: 28%;
   margin-top: 1%;
   padding: 3px;
-  border-radius: 0%;
-  background-color: red;
+  border-radius: 5px;
+  border-width: 0px;
+  background-color: #a09ca0;
 }
 
 #currentTime {
-  background-color: #d2be0e;
+  background-color: #ddffff;
   font-size: 200%;
   width: 100%;
 }
@@ -145,51 +140,47 @@ form {
   background-color: #ddffff;
 }
 #userAmountOfMoneyNum {
-  font-size: 300%;
-  width: 30%;
-  background-color: #4CAF50;
   margin-top: -1%;
-  margin-left: 3%;
 }
 
-#userAmountOfMoneyText {
-  font-size: 300%;
+#userAmountOfMoneyText,
+#userAmountOfMoneyNum {
+  font-size: 100%;
   width: 30%;
   margin-left: 3%;
-  background-color: #4CAF50;
-}
-
-#auctionWelcome {
-  margin-left: 30%;
-}
-
-#auctionWelcome,
-#userName {
-  font-size: 300%;
+  margin-bottom: 20px;
+  background-color: #f2f2f2;
 }
 
 #accordionPictureInfo {
   width: 30%;
-  font-size: 200%;
+  font-size: 100%;
   margin-left: 3%;
-  margin-top: -20%;
+  margin-top: -10%;
 }
 
 #purchasedPictureElement {
   position: absolute;
   width: 30%;
-  font-size: 200%;
-  margin-top: -32%;
+  font-size: 100%;
   margin-left: 3%;
+  margin-top: -20%;
+}
+
+#imagePictureInfo,
+#titlePictureInfo,
+#authorPictureInfo,
+#startPricePictureInfo,
+#descriptionPictureInfo,
+#slider,
+#pictureName {
+  padding: 0px;
+  margin-bottom: 5px;
 }
 
 .accordionHeader {
   padding: 0% 10%;
-  background-color: #d2be0e;
-}
-
-#imagePictureInfo {
-  height: 10%;
-  width: 20%;
-  background-color: #009688;
+  background-color: #f2f2f2;
+  border: 0px #4CAF50 solid;
+  border-radius: 5px;
 }

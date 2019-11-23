@@ -1,0 +1,1 @@
+[{"name":"Egor","wealth":36188,"id":1,"stocks":{"1":5,"2":14,"3":0,"4":24,"5":6},"moneyOnStart":34442,"total":[{"distribType":"Uniform","money":9069},{"distribType":"Normal","money":69286}]},{"name":"Toma","wealth":46210,"id":2,"moneyOnStart":46210,"total":[{"distribType":"Uniform","money":0},{"distribType":"Normal","money":50010}],"stocks":{"2":10,"3":5}}]
