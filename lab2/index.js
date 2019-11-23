@@ -13,6 +13,7 @@ app.use(passport.session())
 
 app.set('view engine', 'pug');
 app.set('views', './views')
+
 require('./authentification').initPassport()
 app.use('/', require('./user'))
 db = fileWork.initDataBase()

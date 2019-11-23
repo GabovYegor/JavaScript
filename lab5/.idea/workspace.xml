@@ -2,9 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="34865133-48c6-4f0d-b159-a1411d2b4fc0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/stockExchange/backend/DataBase/DataBase.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/stockExchange/src/app/component/share-list/share-list.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/stockExchange/src/app/component/share-list/share-list.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stockExchange/src/app/component/share-list/share-list.component.less" beforeDir="false" afterPath="$PROJECT_DIR$/stockExchange/src/app/component/share-list/share-list.component.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab4/backend/DataBase/DataBaseCurrent.json" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4/backend/DataBase/DataBaseCurrent.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab4/public/styles/adminStyle.less" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4/public/styles/adminStyle.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab4/public/styles/commomStyle.less" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4/public/styles/commomStyle.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab4/public/styles/registrationStyle.less" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4/public/styles/registrationStyle.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab4/public/styles/socketStyle.less" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4/public/styles/socketStyle.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab4/public/styles/userStyle.less" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4/public/styles/userStyle.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab4/public/stylesProduction/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/../lab4/public/stylesProduction/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -69,6 +74,7 @@
       <workItem from="1571927710820" duration="5618000" />
       <workItem from="1571933375198" duration="16959000" />
       <workItem from="1571979663175" duration="1626000" />
+      <workItem from="1573142088496" duration="312000" />
     </task>
     <servers />
   </component>

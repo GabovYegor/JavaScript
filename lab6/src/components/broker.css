@@ -1,0 +1,48 @@
+.broker-info{
+    position: absolute;
+    left: 4%;
+    top: 10%;
+    width:300px;
+}
+
+.shares-list{
+    position: absolute;
+    left: 70%;
+    top: 10%;
+    width:500px;
+}
+
+body {
+    background-color: #aaaaaa;
+}
+
+h3 {
+    background: #18027f;
+    color: #ff4d36;
+}
+
+.trade{
+    position: absolute;
+    left: 33%;
+    top: 10%;
+    width:500px;
+}
+.header1{
+    background: rgb(200, 194, 127);
+    color: #174d36;
+}
+
+.in{
+    padding: 10px;
+    font-size: 13px;
+    border: 2px solid rgba(0, 0, 0, 0.5);
+    @include box-shadow(
+    0 2px 10px rgba(0, 0, 0, .25) inset,
+    0 2px 10px rgba(0, 0, 0, .25));
+    @include border-radius(10px);
+    background: rgba(255, 255, 255, .5);
+    @include appearance(none);
+    outline: none;
+    color: #333;
+    width:100px;
+}
